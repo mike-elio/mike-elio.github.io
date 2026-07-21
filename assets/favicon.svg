@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mike Eliovits monogram">
+  <rect width="64" height="64" rx="15" fill="#080d14"/>
+  <rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="#ff7a1a" stroke-opacity=".55"/>
+  <path d="M13 44V20h7.4L32 35.2 43.6 20H51v24h-7V31.2L32 46.5 20 31.2V44z" fill="#ff7a1a"/>
+</svg>
