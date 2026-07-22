@@ -17,17 +17,38 @@ describe("portfolio timelines", () => {
     );
   });
 
-  it("renders the degree and exact certificate credential", () => {
+  it("renders the exact degree, RISE-MICCAI, and existing certificate content", () => {
     const { container } = render(<Education />);
-    expect(screen.getByText("Class of 2026")).toBeInTheDocument();
+    expect(screen.getByText("Sep 2021 – Jun 2026")).toBeInTheDocument();
+    expect(screen.getByText("Grade: 3.23/4.0")).toBeInTheDocument();
+    expect(screen.getByText("RISE-MICCAI Summer School 2025")).toBeInTheDocument();
+    expect(screen.getByText("RISE-MICCAI")).toBeInTheDocument();
+    expect(screen.getByText("Issued Jul 2025")).toBeInTheDocument();
     expect(
       screen.getByText("6e9ae40f-644f-432e-84de-166fcc490525"),
     ).toBeInTheDocument();
-    expect(screen.queryByText(/grade|honors|distinction/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: "View details: Bachelor of Engineering, Artificial Intelligence",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: "View details: RISE-MICCAI Summer School 2025",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", {
+        name: "View details: Artificial Intelligence with Coding & Cybersecurity",
+      }),
+    ).not.toBeInTheDocument();
 
     const text = container.textContent ?? "";
     expect(text.indexOf("Artificial Intelligence with Coding & Cybersecurity")).toBeLessThan(
-      text.indexOf("Bachelor's Degree in Informatics and Artificial Intelligence"),
+      text.indexOf("RISE-MICCAI Summer School 2025"),
+    );
+    expect(text.indexOf("RISE-MICCAI Summer School 2025")).toBeLessThan(
+      text.indexOf("Bachelor of Engineering, Artificial Intelligence"),
     );
   });
 });

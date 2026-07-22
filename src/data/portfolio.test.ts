@@ -18,7 +18,7 @@ describe("portfolio data", () => {
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(2);
     expect(projects).toHaveLength(5);
-    expect(education).toHaveLength(2);
+    expect(education).toHaveLength(3);
   });
 
   it("allows repository actions only for verified public projects", () => {

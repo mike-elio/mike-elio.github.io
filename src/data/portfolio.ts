@@ -58,11 +58,18 @@ export interface CaseStudyProject extends ProjectBase {
 export type Project = PublicProject | CaseStudyProject;
 
 export interface Education {
+  slug: string;
   title: string;
   organization: string;
   date: string;
   type: "Degree" | "Professional Certificate";
   credentialId?: string;
+  grade?: string;
+  activities?: string;
+  summary?: string;
+  details?: string;
+  projects?: readonly string[];
+  skills?: readonly string[];
 }
 
 export const profile: Profile = {
@@ -273,12 +280,47 @@ export const projects: readonly Project[] = [
 
 export const education: readonly Education[] = [
   {
-    title: "Bachelor's Degree in Informatics and Artificial Intelligence",
-    organization: "Arab International University, Syria",
-    date: "Class of 2026",
+    slug: "beng-artificial-intelligence",
+    title: "Bachelor of Engineering, Artificial Intelligence",
+    organization: "Arab International University",
+    date: "Sep 2021 – Jun 2026",
     type: "Degree",
+    grade: "Grade: 3.23/4.0",
+    activities:
+      "Academic Project Team Member | AI and Machine Learning Research | Technical Documentation and Presentations",
+    summary:
+      "Bachelor of Engineering in Informatics Engineering with a focus on artificial intelligence, machine learning, software engineering, databases, and intelligent systems.",
+    projects: [
+      "Nahd — an intelligent digital coaching and career-guidance platform.",
+      "AquaGuard AI — a machine-learning and expert-system platform for water-quality analysis and citizen routing.",
+    ],
+    details:
+      "Gained practical experience with Python, NLP, computer vision, expert systems, large language models, model training and evaluation, system architecture, automated testing, and technical research.",
+    skills: [
+      "Fine-Tuning",
+      "Computer Vision",
+      "Python",
+      "NLP",
+      "Expert Systems",
+      "Large Language Models",
+      "Model Training & Evaluation",
+      "System Architecture",
+      "Automated Testing",
+      "Technical Research",
+    ],
   },
   {
+    slug: "rise-miccai-summer-school-2025",
+    title: "RISE-MICCAI Summer School 2025",
+    organization: "RISE-MICCAI",
+    date: "Issued Jul 2025",
+    type: "Professional Certificate",
+    summary:
+      "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025.",
+    skills: ["Artificial Intelligence", "Machine Learning"],
+  },
+  {
+    slug: "ai-coding-cybersecurity-certificate",
     title: "Artificial Intelligence with Coding & Cybersecurity",
     organization: "Professional Certificate",
     date: "Issued September 17, 2025",

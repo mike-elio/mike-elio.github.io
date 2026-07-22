@@ -12,14 +12,17 @@ export interface TimelineEntry {
   features?: readonly string[];
   tags?: readonly string[];
   credentialId?: string;
+  detailsAvailable?: boolean;
 }
 
 export function Timeline({
   items,
   label,
+  onOpenDetails,
 }: {
   items: readonly TimelineEntry[];
   label: string;
+  onOpenDetails?: (id: string, trigger: HTMLButtonElement) => void;
 }) {
   return (
     <ol aria-label={label} className="timeline">
@@ -52,6 +55,16 @@ export function Timeline({
                 <p className="credential-id">
                   <span>Credential ID</span> {item.credentialId}
                 </p>
+              ) : null}
+              {item.detailsAvailable && onOpenDetails ? (
+                <button
+                  aria-label={`View details: ${item.title}`}
+                  className="timeline-details-trigger"
+                  onClick={(event) => onOpenDetails(item.id, event.currentTarget)}
+                  type="button"
+                >
+                  View details
+                </button>
               ) : null}
             </article>
           </Reveal>
