@@ -1,0 +1,288 @@
+export interface Profile {
+  name: string;
+  title: string;
+  eyebrow: string;
+  positioning: string;
+  summary: string;
+  availability: string;
+  roles: readonly string[];
+  social: ReadonlyArray<{
+    label: "GitHub" | "LinkedIn";
+    url: string;
+  }>;
+}
+
+export interface SkillGroup {
+  title: string;
+  icon: "code" | "brain" | "server" | "tools";
+  items: ReadonlyArray<{
+    label: string;
+    qualifier?: "Advancing";
+  }>;
+}
+
+export interface Experience {
+  title: string;
+  project: string;
+  organization: string;
+  date: string;
+  context: "Academic project";
+  collaboration?: string;
+  summary: string;
+  features: readonly string[];
+  tags: readonly string[];
+}
+
+interface ProjectBase {
+  slug: string;
+  title: string;
+  eyebrow: string;
+  summary: string;
+  description: string;
+  contribution: string;
+  features: readonly string[];
+  technologies: readonly string[];
+  featured?: boolean;
+}
+
+export interface PublicProject extends ProjectBase {
+  visibility: "public";
+  sourceUrl: `https://github.com/mike-elio/${string}`;
+}
+
+export interface CaseStudyProject extends ProjectBase {
+  visibility: "case-study";
+  sourceUrl?: never;
+}
+
+export type Project = PublicProject | CaseStudyProject;
+
+export interface Education {
+  title: string;
+  organization: string;
+  date: string;
+  type: "Degree" | "Professional Certificate";
+  credentialId?: string;
+}
+
+export const profile: Profile = {
+  name: "Mike Eliovits",
+  title: "AI Engineer",
+  eyebrow: "Hello, I'm",
+  positioning:
+    "I build practical AI systems that explain their decisions and ship as usable products.",
+  summary:
+    "I work across LLM applications, natural language processing, computer vision, and reliable backend delivery.",
+  availability: "Open to AI/ML & Backend AI opportunities",
+  roles: [
+    "AI Engineer",
+    "LLM Application Builder",
+    "NLP & Machine Learning Engineer",
+    "Backend AI Developer",
+  ],
+  social: [
+    { label: "GitHub", url: "https://github.com/mike-elio" },
+    {
+      label: "LinkedIn",
+      url: "https://www.linkedin.com/in/mike-eliovits-4861b3379/",
+    },
+  ],
+};
+
+export const skills: readonly SkillGroup[] = [
+  {
+    title: "Languages",
+    icon: "code",
+    items: [{ label: "Python" }, { label: "JavaScript" }],
+  },
+  {
+    title: "AI & ML",
+    icon: "brain",
+    items: [
+      { label: "LLM Applications" },
+      { label: "Machine Learning" },
+      { label: "Deep Learning" },
+      { label: "NLP" },
+      { label: "Computer Vision" },
+    ],
+  },
+  {
+    title: "Backend",
+    icon: "server",
+    items: [
+      { label: "FastAPI" },
+      { label: "Node.js" },
+      { label: "Laravel" },
+      { label: "REST APIs" },
+    ],
+  },
+  {
+    title: "Tools & Cloud",
+    icon: "tools",
+    items: [
+      { label: "Git" },
+      { label: "GitHub" },
+      { label: "Docker" },
+      { label: "Microsoft Azure", qualifier: "Advancing" },
+    ],
+  },
+];
+
+export const experiences: readonly Experience[] = [
+  {
+    title: "AI Engineer — Academic Graduation Project",
+    project: "Nahd Graduation Project",
+    organization: "Arab International University (AIU)",
+    date: "2025 — June 2026",
+    context: "Academic project",
+    collaboration: "Collaborative university project",
+    summary:
+      "Contributed to the AI layer of a coaching platform designed as a collaborative graduation project.",
+    features: [
+      "Path recommendation and explainable guidance",
+      "Technical fault diagnosis",
+      "Image-based task-proof verification",
+      "Voice Agent API integration",
+    ],
+    tags: ["Applied AI", "Computer Vision", "Voice AI", "Backend APIs"],
+  },
+  {
+    title: "AI & Backend Engineer — Academic Project",
+    project: "AquaGuard Junior Project",
+    organization: "Arab International University (AIU)",
+    date: "June 2026",
+    context: "Academic project",
+    summary:
+      "Worked on AI and backend logic for a water-quality decision-support academic project.",
+    features: [
+      "Water quality scoring and prediction",
+      "Diagnostic reasoning around reported conditions",
+      "Verified provider recommendations and citizen routing",
+    ],
+    tags: ["Machine Learning", "Decision Support", "Backend AI"],
+  },
+];
+
+export const projects: readonly Project[] = [
+  {
+    slug: "nahd",
+    title: "Nahd AI Coaching Platform",
+    eyebrow: "Flagship academic case study",
+    visibility: "case-study",
+    featured: true,
+    summary:
+      "A collaborative AI coaching platform combining guidance, diagnosis, visual verification, and voice interaction.",
+    description:
+      "Nahd was developed as a university graduation project to explore how several AI capabilities can support one coherent coaching workflow.",
+    contribution:
+      "Contributed to the AI layer across recommendation, diagnostic, image-verification, and voice-agent capabilities within the collaborative project.",
+    features: [
+      "Explainable path recommendation",
+      "Technical fault diagnosis",
+      "Image-based task-proof verification",
+      "Voice Agent API integration",
+    ],
+    technologies: ["Python", "FastAPI", "Computer Vision", "Voice AI"],
+  },
+  {
+    slug: "goalpath",
+    title: "GoalPath Expert System",
+    eyebrow: "Public AI system",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/senior",
+    summary:
+      "An interview-driven expert system that produces explainable career-track recommendations and gap plans.",
+    description:
+      "GoalPath turns structured interview answers into fit scores, strengths, recommendation reasoning, and actionable next steps.",
+    contribution:
+      "Designed the explainable decision flow and delivered it through a typed FastAPI application with automated tests.",
+    features: [
+      "Structured interview flow",
+      "Explainable fit scoring",
+      "Strength and gap analysis",
+      "Typed API validation",
+    ],
+    technologies: ["Python", "FastAPI", "Pydantic", "pytest"],
+  },
+  {
+    slug: "aquaguard",
+    title: "AquaGuard AI",
+    eyebrow: "Academic case study",
+    visibility: "case-study",
+    summary:
+      "A water-quality decision-support concept combining prediction, diagnostic reasoning, and provider routing.",
+    description:
+      "AquaGuard explored how AI and backend logic can organize reported water conditions into understandable guidance and verified next steps.",
+    contribution:
+      "Worked on water-quality scoring, diagnostic rules, and backend flows that connect citizens with verified providers.",
+    features: [
+      "Water quality scoring",
+      "Condition prediction",
+      "Diagnostic reasoning",
+      "Verified provider routing",
+    ],
+    technologies: ["Machine Learning", "Python", "Backend AI", "REST APIs"],
+  },
+  {
+    slug: "product-task-platform",
+    title: "Product & Task Management Platform",
+    eyebrow: "Public backend project",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/project-part2",
+    summary:
+      "A Laravel application organizing product, task, and user workflows through structured backend models.",
+    description:
+      "The project demonstrates server-rendered application structure, relational data workflows, and maintainable product and task operations.",
+    contribution:
+      "Implemented the application workflows and data relationships with Laravel and Eloquent.",
+    features: [
+      "Product workflows",
+      "Task lifecycle management",
+      "User-oriented operations",
+      "Relational data modeling",
+    ],
+    technologies: ["Laravel", "Eloquent", "Vite"],
+  },
+  {
+    slug: "game-discovery",
+    title: "Game Discovery Platform",
+    eyebrow: "Public frontend project",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/game-discovery-platform",
+    summary:
+      "A responsive game-discovery interface with category browsing, search, filtering, and reusable components.",
+    description:
+      "The platform focuses on clear discovery flows, responsive interaction, and component-driven frontend composition.",
+    contribution:
+      "Built the React interface and data-query experience across browsing, searching, and filtering states.",
+    features: [
+      "Category browsing",
+      "Search and filtering",
+      "Responsive cards",
+      "Query-state handling",
+    ],
+    technologies: [
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "React Query",
+    ],
+  },
+];
+
+export const education: readonly Education[] = [
+  {
+    title: "Bachelor's Degree in Informatics and Artificial Intelligence",
+    organization: "Arab International University, Syria",
+    date: "Class of 2026",
+    type: "Degree",
+  },
+  {
+    title: "Artificial Intelligence with Coding & Cybersecurity",
+    organization: "Professional Certificate",
+    date: "Issued September 17, 2025",
+    type: "Professional Certificate",
+    credentialId: "6e9ae40f-644f-432e-84de-166fcc490525",
+  },
+];
