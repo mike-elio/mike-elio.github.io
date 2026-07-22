@@ -446,6 +446,19 @@ test("source relationships, palette, dependencies, and legacy removal are closed
   await access(new URL("../package-lock.json", import.meta.url));
 });
 
+test("hero social links glow and numbered section kickers are larger", async () => {
+  const styles = await readRoot("src/styles.css");
+
+  assert.match(
+    styles,
+    /\.hero-socials a\s*\{[^}]*color:\s*var\(--accent-light\);[^}]*text-shadow:\s*0 0 18px rgb\(255 122 26 \/ 38%\);[^}]*\}/s,
+  );
+  assert.match(
+    styles,
+    /\.section-kicker\s*\{[^}]*font-size:\s*clamp\(\.95rem,\s*1\.4vw,\s*1\.1rem\);[^}]*\}/s,
+  );
+});
+
 test("deployment workflow uses locked installs, complete verification, pinned actions, and least privilege", async () => {
   const workflow = await readRoot(".github/workflows/deploy-pages.yml");
   const dependabot = await readRoot(".github/dependabot.yml");
