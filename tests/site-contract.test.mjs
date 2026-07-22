@@ -1,208 +1,531 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { access, readFile, readdir } from "node:fs/promises";
+import { basename, extname } from "node:path";
 
 const root = new URL("../", import.meta.url);
-const read = (path, encoding = "utf8") =>
+const dist = new URL("../dist/", import.meta.url);
+const productionUrl = "https://mike-elio.github.io/";
+const readRoot = (path, encoding = "utf8") =>
   readFile(new URL(path, root), encoding);
+const readDist = (path, encoding = "utf8") =>
+  readFile(new URL(path, dist), encoding);
 
-const escapeRegExp = (value) =>
-  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const approvedJsonLd =
+  '{"@context":"https://schema.org","@type":"Person","name":"Mike Eliovits","url":"https://mike-elio.github.io/","jobTitle":"AI Engineer","alumniOf":{"@type":"CollegeOrUniversity","name":"Arab International University"},"sameAs":["https://github.com/mike-elio","https://www.linkedin.com/in/mike-eliovits-4861b3379/"],"knowsAbout":["LLM Applications","Natural Language Processing","Computer Vision","Backend AI Development"]}';
+const approvedCsp =
+  "default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-SVYAOca/ZymxLHJqsO2O5BjJjISPKCDbzb8lQD7OEH4=' https://challenges.cloudflare.com; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://formspree.io https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; form-action https://formspree.io; manifest-src 'self'; upgrade-insecure-requests";
+const approvedPerson = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Mike Eliovits",
+  url: productionUrl,
+  jobTitle: "AI Engineer",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Arab International University",
+  },
+  sameAs: [
+    "https://github.com/mike-elio",
+    "https://www.linkedin.com/in/mike-eliovits-4861b3379/",
+  ],
+  knowsAbout: [
+    "LLM Applications",
+    "Natural Language Processing",
+    "Computer Vision",
+    "Backend AI Development",
+  ],
+};
+const approvedPalette = new Set([
+  "#080d14",
+  "#05090f",
+  "#101823",
+  "#151f2c",
+  "#0d141e",
+  "#f6f3ee",
+  "#9eabb9",
+  "#c2cad3",
+  "#ff7a1a",
+  "#ffb276",
+  "#b94b00",
+  "#70df9b",
+]);
+const textExtensions = new Set([
+  ".cjs",
+  ".css",
+  ".csv",
+  ".htm",
+  ".html",
+  ".js",
+  ".json",
+  ".md",
+  ".mjs",
+  ".svg",
+  ".txt",
+  ".webmanifest",
+  ".xml",
+  ".yaml",
+  ".yml",
+]);
+const binaryExtensions = new Set([
+  ".avif",
+  ".br",
+  ".gif",
+  ".gz",
+  ".ico",
+  ".jpeg",
+  ".jpg",
+  ".otf",
+  ".pdf",
+  ".png",
+  ".ttf",
+  ".wasm",
+  ".webp",
+  ".woff",
+  ".woff2",
+  ".zip",
+]);
 
-test("index contains the professional portfolio contract", async () => {
-  const html = await read("index.html");
+function parseAttributes(tag) {
+  return Object.fromEntries(
+    [...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((match) => [
+      match[1].toLowerCase(),
+      match[2],
+    ]),
+  );
+}
 
-  for (const value of [
-    "Mike Eliovits",
-    "AI Engineer",
-    'id="about"',
-    'id="projects"',
-    'id="skills"',
-    'id="contact"',
+function openingTags(html, name) {
+  return [...html.matchAll(new RegExp(`<${name}\\b[^>]*>`, "gi"))].map(
+    ([tag]) => ({ tag, attributes: parseAttributes(tag) }),
+  );
+}
+
+function singleton(items, description) {
+  assert.equal(items.length, 1, `Expected one ${description}`);
+  return items[0];
+}
+
+function exactMeta(html, key, value) {
+  const meta = singleton(
+    openingTags(html, "meta").filter(
+      ({ attributes }) => attributes[key] === value,
+    ),
+    `meta[${key}="${value}"]`,
+  );
+  return meta.attributes;
+}
+
+async function collectFiles(directory, prefix = "") {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const files = [];
+  for (const entry of entries) {
+    const path = `${prefix}${entry.name}`;
+    const url = new URL(entry.name + (entry.isDirectory() ? "/" : ""), directory);
+    if (entry.isDirectory()) files.push(...(await collectFiles(url, `${path}/`)));
+    else files.push({ path, url });
+  }
+  return files;
+}
+
+function deployableFileType(path) {
+  const extension = extname(path).toLowerCase();
+  if (textExtensions.has(extension) || extension === "") return "text";
+  if (binaryExtensions.has(extension)) return "binary";
+  return "unknown";
+}
+
+function xmlValue(xml, element) {
+  const matches = [
+    ...xml.matchAll(new RegExp(`<${element}>([^<]*)</${element}>`, "g")),
+  ];
+  return singleton(matches, `<${element}>`)[1];
+}
+
+test("production HTML contains exact canonical, social, schema, and CSP metadata", async () => {
+  const html = await readDist("index.html");
+  const title = singleton(
+    [...html.matchAll(/<title>([^<]*)<\/title>/g)],
+    "document title",
+  )[1];
+  assert.equal(title, "Mike Eliovits — AI Engineer");
+
+  const canonical = singleton(
+    openingTags(html, "link").filter(
+      ({ attributes }) => attributes.rel === "canonical",
+    ),
+    "canonical link",
+  );
+  assert.deepEqual(canonical.attributes, {
+    rel: "canonical",
+    href: productionUrl,
+  });
+
+  const expectedNamedMeta = {
+    description:
+      "AI Engineer building practical LLM, NLP, computer vision, and backend AI applications. Explore projects and academic case studies by Mike Eliovits.",
+    referrer: "strict-origin-when-cross-origin",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Mike Eliovits — AI Engineer",
+    "twitter:description":
+      "Practical AI systems, explainable decisions, and reliable backend delivery.",
+    "twitter:image": `${productionUrl}assets/og-card.png`,
+  };
+  for (const [name, content] of Object.entries(expectedNamedMeta)) {
+    assert.deepEqual(exactMeta(html, "name", name), { name, content });
+  }
+
+  const expectedPropertyMeta = {
+    "og:type": "website",
+    "og:site_name": "Mike Eliovits Portfolio",
+    "og:title": "Mike Eliovits — AI Engineer",
+    "og:description":
+      "Practical AI systems, explainable decisions, and reliable backend delivery.",
+    "og:url": productionUrl,
+    "og:image": `${productionUrl}assets/og-card.png`,
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Mike Eliovits, AI Engineer",
+  };
+  for (const [property, content] of Object.entries(expectedPropertyMeta)) {
+    assert.deepEqual(exactMeta(html, "property", property), {
+      property,
+      content,
+    });
+  }
+
+  const cspMeta = exactMeta(html, "http-equiv", "Content-Security-Policy");
+  assert.deepEqual(cspMeta, {
+    "http-equiv": "Content-Security-Policy",
+    content: approvedCsp,
+  });
+  assert.doesNotMatch(cspMeta.content, /\*|unsafe-inline|unsafe-eval/i);
+  const directives = Object.fromEntries(
+    cspMeta.content.split("; ").map((directive) => {
+      const [name, ...values] = directive.split(" ");
+      return [name, values];
+    }),
+  );
+  assert.deepEqual(Object.keys(directives), [
+    "default-src",
+    "base-uri",
+    "object-src",
+    "script-src",
+    "style-src",
+    "img-src",
+    "font-src",
+    "connect-src",
+    "frame-src",
+    "form-action",
+    "manifest-src",
+    "upgrade-insecure-requests",
+  ]);
+  assert.doesNotMatch(directives["script-src"].join(" "), /data:|blob:/i);
+  const approvedOrigins = new Set([
+    "https://formspree.io",
+    "https://challenges.cloudflare.com",
+  ]);
+  const cspOrigins = cspMeta.content.match(/https:\/\/[^\s;]+/g) ?? [];
+  assert.deepEqual(new Set(cspOrigins), approvedOrigins);
+
+  const structuredScripts = [
+    ...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi),
+  ].filter((match) => parseAttributes(match[1]).type === "application/ld+json");
+  const structured = singleton(structuredScripts, "Person JSON-LD script");
+  assert.deepEqual(parseAttributes(structured[1]), {
+    type: "application/ld+json",
+  });
+  assert.equal(structured[2], approvedJsonLd);
+  assert.deepEqual(JSON.parse(structured[2]), approvedPerson);
+  const calculatedHash = `sha256-${createHash("sha256")
+    .update(structured[2], "utf8")
+    .digest("base64")}`;
+  assert.equal(
+    calculatedHash,
+    "sha256-SVYAOca/ZymxLHJqsO2O5BjJjISPKCDbzb8lQD7OEH4=",
+  );
+  assert.ok(directives["script-src"].includes(`'${calculatedHash}'`));
+});
+
+test("published artifact contains exact support-file and image contracts", async () => {
+  await Promise.all(
+    [
+      "404.html",
+      "robots.txt",
+      "sitemap.xml",
+      ".nojekyll",
+      "assets/profile.jpg",
+      "assets/og-card.png",
+      "assets/favicon.svg",
+    ].map((path) => access(new URL(path, dist))),
+  );
+
+  const [profile, social, favicon, robots, sitemap, notFound] =
+    await Promise.all([
+      readDist("assets/profile.jpg", null),
+      readDist("assets/og-card.png", null),
+      readDist("assets/favicon.svg"),
+      readDist("robots.txt"),
+      readDist("sitemap.xml"),
+      readDist("404.html"),
+    ]);
+  assert.deepEqual([...profile.subarray(0, 3)], [0xff, 0xd8, 0xff]);
+  assert.deepEqual(
+    [...social.subarray(0, 8)],
+    [137, 80, 78, 71, 13, 10, 26, 10],
+  );
+  assert.equal(social.readUInt32BE(16), 1200);
+  assert.equal(social.readUInt32BE(20), 630);
+  assert.equal((await readDist(".nojekyll")).length, 0);
+  assert.match(favicon, /#ff7a1a/i);
+
+  const robotLines = robots
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  assert.deepEqual(robotLines, [
+    "User-agent: *",
+    "Allow: /",
+    `Sitemap: ${productionUrl}sitemap.xml`,
+  ]);
+
+  const urlEntries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)];
+  const urlEntry = singleton(urlEntries, "sitemap URL entry")[1];
+  assert.equal(xmlValue(urlEntry, "loc"), productionUrl);
+  assert.equal(xmlValue(urlEntry, "lastmod"), "2026-07-22");
+  assert.equal(xmlValue(urlEntry, "changefreq"), "monthly");
+  assert.equal(xmlValue(urlEntry, "priority"), "1.0");
+
+  const anchors = [...notFound.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)];
+  const backLink = singleton(anchors, "404 back link");
+  assert.deepEqual(parseAttributes(backLink[1]), { href: "/" });
+  assert.equal(backLink[2].trim(), "Back to portfolio");
+});
+
+test("published files are recursively classified and contain no private data", async () => {
+  const files = await collectFiles(dist);
+  const chunks = [];
+  for (const file of files) {
+    const name = basename(file.path);
+    assert.doesNotMatch(
+      name,
+      /^\.?env(?:ironment)?(?:[._-].*)?$/i,
+      `Forbidden environment filename: ${file.path}`,
+    );
+    assert.doesNotMatch(name, /\.map$/i, `Source map: ${file.path}`);
+    const type = deployableFileType(file.path);
+    assert.notEqual(type, "unknown", `Unclassified artifact: ${file.path}`);
+    if (type === "text") chunks.push(await readFile(file.url, "utf8"));
+  }
+
+  const published = chunks.join("\n");
+  const forbidden = [
+    ["email address", /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i],
+    ["mailto link", /mailto:/i],
+    ["source map directive", /sourceMappingURL/i],
+    ["Formspree public test ID", /\btestformid\b/i],
+    ["Turnstile public test ID", /1x00000000000000000000AA/i],
+    [
+      "secret or token marker",
+      /\b(?:access[_-]?token|api[_-]?key|client[_-]?secret|github[_-]?token|private[_-]?key|turnstile[_-]?secret)\b/i,
+    ],
+    [
+      "generic credential assignment",
+      /\b(?:credential|password|passwd|secret|token)\s*[:=]\s*(?:["'`][^"'`\r\n]{4,}["'`]|[A-Za-z0-9+/_=-]{8,})/i,
+    ],
+    [
+      "credential environment marker",
+      /\b[A-Z][A-Z0-9_]*(?:API_KEY|PASSWORD|PRIVATE_KEY|SECRET|TOKEN)\b/,
+    ],
+    ["private key", /-----BEGIN [A-Z ]*PRIVATE KEY-----/i],
+    ["GitHub token value", /\bgh[pousr]_[A-Za-z0-9]{20,}\b/],
+    ["AWS access key", /\bAKIA[A-Z0-9]{16}\b/],
+    [
+      "runtime or private GitHub URL",
+      /(?:api\.github\.com|gist\.github\.com|raw\.githubusercontent\.com)/i,
+    ],
+    ["temporary LinkedIn media URL", /media\.licdn\.com/i],
+    [
+      "local or private-network URL",
+      /https?:\/\/(?:localhost|127\.0\.0\.1|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|172\.(?:1[6-9]|2\d|3[01])\.\d+\.\d+)/i,
+    ],
+  ];
+  for (const [description, pattern] of forbidden) {
+    assert.doesNotMatch(published, pattern, `Published ${description}`);
+  }
+
+  const approvedGithubUrls = new Set([
+    "https://github.com/mike-elio",
     "https://github.com/mike-elio/senior",
     "https://github.com/mike-elio/project-part2",
     "https://github.com/mike-elio/game-discovery-platform",
-    "https://www.linkedin.com/in/mike-eliovits-4861b3379/",
-    'src="assets/profile.jpg"',
-    'type="application/ld+json"',
-    'class="focus-strip"',
-    'class="project-number"',
-    'class="tag-list"',
-    'class="portrait-fallback"',
-    '<link rel="canonical" href="https://mike-elio.github.io/">',
-  ]) {
-    assert.match(html, new RegExp(escapeRegExp(value)));
-  }
-
-  assert.doesNotMatch(html, /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  assert.doesNotMatch(html, /media\.licdn\.com/i);
-  assert.doesNotMatch(html, /task-manager-laravel/i);
-});
-
-test("index exposes essential accessibility hooks", async () => {
-  const html = await read("index.html");
-
-  assert.match(html, /^<!DOCTYPE html>/);
-  assert.match(html, /class="skip-link"/);
-  assert.match(html, /aria-controls="site-nav"/);
-  assert.match(html, /aria-expanded="false"/);
-  assert.match(html, /<main id="main">/);
-  assert.match(html, /alt="Mike Eliovits"/);
-  assert.match(html, /aria-label="Primary focus areas"/);
-  assert.doesNotMatch(html, /<dl[^>]+aria-label=/);
-});
-
-test("styles implement the approved responsive orange identity", async () => {
-  const css = await read("styles.css");
-
-  assert.match(css, /--accent:\s*#ff7a1a/i);
-  assert.match(css, /--background:\s*#080d14/i);
-  assert.match(css, /@media\s*\(max-width:\s*760px\)/i);
-  assert.match(css, /prefers-reduced-motion:\s*reduce/i);
-  assert.match(css, /:focus-visible/);
-  assert.match(css, /\.project-grid/);
-  assert.match(css, /\.portrait-fallback/);
-  assert.match(css, /\.reveal-ready/);
-});
-
-test("repository filtering keeps only future portfolio-ready originals", async () => {
-  const { filterPortfolioRepositories, formatRepositoryName } = await import(
-    "../script.js"
+  ]);
+  const githubUrls = new Set(
+    published.match(/https:\/\/github\.com\/[\w./-]+/g) ?? [],
   );
-  const input = [
-    {
-      name: "new-ai-app",
-      fork: false,
-      archived: false,
-      description: "Useful AI application",
-      topics: ["portfolio", "artificial-intelligence"],
-      pushed_at: "2026-07-20T10:00:00Z",
-    },
-    {
-      name: "older-nlp-tool",
-      fork: false,
-      archived: false,
-      description: "NLP utility",
-      topics: ["portfolio"],
-      pushed_at: "2026-07-18T10:00:00Z",
-    },
-    {
-      name: "task-manager-laravel",
-      fork: true,
-      archived: false,
-      description: "Fork",
-      topics: ["portfolio"],
-      pushed_at: "2026-07-21T10:00:00Z",
-    },
-    {
-      name: "learngit",
-      fork: false,
-      archived: false,
-      description: null,
-      topics: [],
-      pushed_at: "2026-07-19T10:00:00Z",
-    },
-    {
-      name: "senior",
-      fork: false,
-      archived: false,
-      description: "Featured project",
-      topics: ["portfolio"],
-      pushed_at: "2026-07-17T10:00:00Z",
-    },
-  ];
+  assert.deepEqual(githubUrls, approvedGithubUrls);
+});
 
+test("source relationships, palette, dependencies, and legacy removal are closed contracts", async () => {
+  const [portfolio, packageJson, styles, index, generator] = await Promise.all([
+    readRoot("src/data/portfolio.ts"),
+    readRoot("package.json").then(JSON.parse),
+    readRoot("src/styles.css"),
+    readRoot("index.html"),
+    readRoot("scripts/generate-og-card.sh"),
+  ]);
+  const publicFiles = await collectFiles(new URL("../public/", import.meta.url));
+  const publicTextSources = await Promise.all(
+    publicFiles
+      .filter((file) => deployableFileType(file.path) === "text")
+      .map((file) => readFile(file.url, "utf8")),
+  );
+  const paletteSources = [styles, index, generator, ...publicTextSources];
+
+  const projectSection = portfolio
+    .split("export const projects: readonly Project[] = [")[1]
+    .split("export const education:")[0];
+  const projectBlocks = projectSection.match(/\n {2}\{[\s\S]*?\n {2}\},/g) ?? [];
+  const projectFields = projectBlocks.map((block) =>
+    Object.fromEntries(
+      [...block.matchAll(/\n {4}(slug|visibility|sourceUrl): "([^"]+)"/g)].map(
+        (match) => [match[1], match[2]],
+      ),
+    ),
+  );
   assert.deepEqual(
-    filterPortfolioRepositories(input).map((repository) => repository.name),
-    ["new-ai-app", "older-nlp-tool"],
+    projectFields
+      .filter((project) => project.visibility === "public")
+      .map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
+    [
+      {
+        slug: "goalpath",
+        sourceUrl: "https://github.com/mike-elio/senior",
+      },
+      {
+        slug: "product-task-platform",
+        sourceUrl: "https://github.com/mike-elio/project-part2",
+      },
+      {
+        slug: "game-discovery",
+        sourceUrl:
+          "https://github.com/mike-elio/game-discovery-platform",
+      },
+    ],
   );
-  assert.equal(formatRepositoryName("new-ai-app"), "New AI App");
-  assert.equal(formatRepositoryName("llm-api-starter"), "LLM API Starter");
-});
+  assert.ok(
+    projectFields
+      .filter((project) => project.visibility === "case-study")
+      .every((project) => project.sourceUrl === undefined),
+  );
 
-test("browser enhancement includes resilient navigation, portrait, and reveal behavior", async () => {
-  const script = await read("script.js");
+  const colors = paletteSources.flatMap((source) =>
+    (source.match(/#(?:[\da-f]{3,4}|[\da-f]{6}|[\da-f]{8})\b/gi) ?? []).map(
+      (color) => color.toLowerCase(),
+    ),
+  );
+  for (const color of colors) {
+    assert.ok(approvedPalette.has(color), `Unapproved palette color: ${color}`);
+  }
+  const cssColors = new Set(
+    (styles.match(/#[\da-f]{6}\b/gi) ?? []).map((color) =>
+      color.toLowerCase(),
+    ),
+  );
+  assert.deepEqual(cssColors, approvedPalette);
 
-  assert.match(script, /IntersectionObserver/);
-  assert.match(script, /is-fallback/);
-  assert.match(script, /aria-expanded/);
-  assert.match(script, /api\.github\.com\/users\/mike-elio\/repos/);
-  assert.match(script, /textContent/);
-});
-
-test("local brand assets exist and use stable web formats", async () => {
-  const [profile, social, favicon] = await Promise.all([
-    read("assets/profile.jpg", null),
-    read("assets/og-card.png", null),
-    read("assets/favicon.svg"),
+  assert.deepEqual(Object.keys(packageJson.dependencies).sort(), [
+    "react",
+    "react-dom",
+    "zod",
   ]);
-
-  assert.deepEqual([...profile.subarray(0, 3)], [0xff, 0xd8, 0xff]);
-  assert.equal(profile.length > 8_000, true);
-
-  assert.deepEqual([...social.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
-  assert.equal(social.readUInt32BE(16), 1200);
-  assert.equal(social.readUInt32BE(20), 630);
-  assert.equal(social.length > 10_000, true);
-
-  assert.match(favicon, /<svg/);
-  assert.match(favicon, /#ff7a1a/i);
+  await assert.rejects(access(new URL("../script.js", import.meta.url)));
+  await assert.rejects(access(new URL("../styles.css", import.meta.url)));
+  await access(new URL("../src/main.tsx", import.meta.url));
+  await access(new URL("../package-lock.json", import.meta.url));
 });
 
-test("deployment and maintenance files describe a complete GitHub Pages site", async () => {
-  const [notFound, robots, sitemap, readme, noJekyll] = await Promise.all([
-    read("404.html"),
-    read("robots.txt"),
-    read("sitemap.xml"),
-    read("README.md"),
-    read(".nojekyll"),
-  ]);
+test("deployment workflow uses locked installs, complete verification, pinned actions, and least privilege", async () => {
+  const workflow = await readRoot(".github/workflows/deploy-pages.yml");
+  const dependabot = await readRoot(".github/dependabot.yml");
 
-  assert.match(notFound, /Page not found/i);
-  assert.match(notFound, /^<!DOCTYPE html>/);
-  assert.match(notFound, /href="\/"/);
-  assert.match(notFound, /#ff7a1a/i);
+  assert.match(workflow, /push:\s*\n\s+branches:\s*\[main\]/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /permissions:\s*\n\s+contents:\s*read/);
+  assert.match(workflow, /concurrency:\s*\n\s+group:\s*pages\s*\n\s+cancel-in-progress:\s*true/);
 
-  assert.match(robots, /User-agent:\s*\*/i);
-  assert.match(robots, /Allow:\s*\//i);
+  for (const command of [
+    "npm ci",
+    "npm audit --audit-level=high",
+    "npm run lint",
+    "npm run typecheck",
+    "npm test",
+    "npm run build",
+    "npm run test:contract",
+    "npm run check:bundle",
+    "npx playwright install --with-deps chromium",
+    "npm run test:e2e",
+  ]) {
+    assert.ok(workflow.includes(command), `Missing workflow command: ${command}`);
+  }
   assert.match(
-    robots,
-    /Sitemap:\s*https:\/\/mike-elio\.github\.io\/sitemap\.xml/i,
+    workflow,
+    /VITE_FORMSPREE_FORM_ID:\s*\$\{\{ vars\.VITE_FORMSPREE_FORM_ID \}\}/,
+  );
+  assert.match(
+    workflow,
+    /VITE_TURNSTILE_SITE_KEY:\s*\$\{\{ vars\.VITE_TURNSTILE_SITE_KEY \}\}/,
+  );
+  assert.match(
+    workflow,
+    /EXPECTED_FORMSPREE_FORM_ID:\s*\$\{\{ vars\.VITE_FORMSPREE_FORM_ID \}\}/,
   );
 
-  assert.match(sitemap, /<loc>https:\/\/mike-elio\.github\.io\/<\/loc>/i);
-  assert.match(sitemap, /<lastmod>2026-07-21<\/lastmod>/i);
-
-  assert.match(readme, /professional portfolio/i);
-  assert.match(readme, /`portfolio` topic/i);
-  assert.match(readme, /meaningful description/i);
-  assert.doesNotMatch(readme, /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  assert.equal(noJekyll, "");
-});
-
-test("metadata, internal navigation, and local assets resolve safely", async () => {
-  const html = await read("index.html");
-  const structuredDataMatch = html.match(
-    /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/,
-  );
-  assert.ok(structuredDataMatch, "Person structured data should exist");
-
-  const structuredData = JSON.parse(structuredDataMatch[1]);
-  assert.equal(structuredData["@type"], "Person");
-  assert.equal(structuredData.name, "Mike Eliovits");
-  assert.equal(structuredData.jobTitle, "AI Engineer");
-
-  const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
-  for (const [, fragment] of html.matchAll(/href="#([^"]+)"/g)) {
-    assert.ok(ids.has(fragment), `Missing fragment target: #${fragment}`);
-  }
-
-  const localPaths = [
-    ...html.matchAll(/(?:href|src)="((?!https?:|#|\/)[^"]+)"/g),
+  const actionReferences = [
+    ...workflow.matchAll(/^\s*uses:\s*([^\s#]+)(?:\s+#.*)?$/gm),
   ].map((match) => match[1]);
-  for (const path of localPaths) await access(new URL(path, root));
-
-  for (const [link] of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
-    assert.match(link, /rel="noopener noreferrer"/);
+  assert.equal(actionReferences.length, 5);
+  for (const reference of actionReferences) {
+    assert.match(
+      reference,
+      /^[\w.-]+\/[\w.-]+@[0-9a-f]{40}$/,
+      `Action is not pinned to a full commit SHA: ${reference}`,
+    );
   }
+  assert.doesNotMatch(workflow, /uses:\s*[^\s]+@v\d+\s*$/m);
+
+  const deployJob = workflow.split(/^\s{2}deploy:\s*$/m)[1];
+  assert.ok(deployJob, "Missing deploy job");
+  assert.match(deployJob, /needs:\s*build/);
+  assert.match(
+    deployJob,
+    /permissions:\s*\n\s+pages:\s*write\s*\n\s+id-token:\s*write/,
+  );
+  assert.match(
+    deployJob,
+    /environment:\s*\n\s+name:\s*github-pages\s*\n\s+url:\s*\$\{\{ steps\.deployment\.outputs\.page_url \}\}/,
+  );
+  assert.equal((workflow.match(/pages:\s*write/g) ?? []).length, 1);
+  assert.equal((workflow.match(/id-token:\s*write/g) ?? []).length, 1);
+  assert.match(
+    workflow,
+    /uses:\s*actions\/upload-pages-artifact@[0-9a-f]{40}[\s\S]*?with:\s*\n\s+path:\s*\.\/dist\s*\n\s+include-hidden-files:\s*true/,
+  );
+  assert.match(workflow, /actions\/configure-pages@[0-9a-f]{40}/);
+  assert.match(workflow, /actions\/deploy-pages@[0-9a-f]{40}/);
+
+  for (const ecosystem of ["npm", "github-actions"]) {
+    assert.match(dependabot, new RegExp(`package-ecosystem: "${ecosystem}"`));
+  }
+  assert.equal((dependabot.match(/interval:\s*"weekly"/g) ?? []).length, 2);
+  assert.equal((dependabot.match(/day:\s*"monday"/g) ?? []).length, 2);
+  assert.equal(
+    (dependabot.match(/timezone:\s*"America\/Toronto"/g) ?? []).length,
+    2,
+  );
+  assert.equal(
+    (dependabot.match(/open-pull-requests-limit:\s*5/g) ?? []).length,
+    2,
+  );
 });
