@@ -459,6 +459,23 @@ test("hero social links glow and numbered section kickers are larger", async () 
   );
 });
 
+test("hero greeting is larger while the name keeps a balanced lead", async () => {
+  const styles = await readRoot("src/styles.css");
+
+  assert.match(
+    styles,
+    /\.hero-eyebrow\s*\{[^}]*font-size:\s*clamp\(1\.15rem,\s*2\.2vw,\s*1\.55rem\);[^}]*\}/s,
+  );
+  assert.match(
+    styles,
+    /\.hero h1\s*\{[^}]*font-size:\s*clamp\(2\.9rem,\s*6\.5vw,\s*5\.8rem\);[^}]*\}/s,
+  );
+  assert.match(
+    styles,
+    /@media \(max-width:\s*639px\)[\s\S]*?\.hero h1\s*\{[^}]*font-size:\s*clamp\(2\.65rem,\s*14vw,\s*4\.25rem\);[^}]*\}/,
+  );
+});
+
 test("deployment workflow uses locked installs, complete verification, pinned actions, and least privilege", async () => {
   const workflow = await readRoot(".github/workflows/deploy-pages.yml");
   const dependabot = await readRoot(".github/dependabot.yml");

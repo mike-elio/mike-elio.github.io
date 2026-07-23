@@ -211,10 +211,11 @@ main { overflow: clip; }
   letter-spacing: .15em;
   text-transform: uppercase;
 }
+.hero-eyebrow { font-size: clamp(1.15rem, 2.2vw, 1.55rem); }
 .section-kicker { font-size: clamp(.95rem, 1.4vw, 1.1rem); }
 .hero h1 {
   margin-bottom: .65rem;
-  font-size: clamp(3.3rem, 8vw, 7rem);
+  font-size: clamp(2.9rem, 6.5vw, 5.8rem);
   font-weight: 950;
   letter-spacing: -.075em;
   line-height: .9;
@@ -525,7 +526,7 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
   .site-header { padding-inline: 1rem; }
   .hero, .section, .site-footer { width: min(calc(100% - 1.25rem), var(--max-width)); }
   .hero { padding-bottom: 3rem; }
-  .hero h1 { font-size: clamp(3rem, 18vw, 5rem); }
+  .hero h1 { font-size: clamp(2.65rem, 14vw, 4.25rem); }
   .hero-actions, .button-link { width: 100%; }
   .ambient-bubble--3, .ambient-bubble--4, .ambient-bubble--5, .ambient-bubble--6 { display: none; }
   .fact-row, .skills-grid, .project-grid, .contact-form { grid-template-columns: 1fr; }
