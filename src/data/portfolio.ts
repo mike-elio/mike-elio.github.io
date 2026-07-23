@@ -317,14 +317,26 @@ export const education: readonly Education[] = [
     type: "Professional Certificate",
     summary:
       "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025.",
-    skills: ["Artificial Intelligence", "Machine Learning"],
+    skills: [
+      "Artificial Intelligence (AI)",
+      "Machine Learning",
+      "Computer Vision",
+      "Medical Imaging",
+    ],
   },
   {
     slug: "ai-coding-cybersecurity-certificate",
     title: "Artificial Intelligence with Coding & Cybersecurity",
-    organization: "Professional Certificate",
-    date: "Issued September 17, 2025",
+    organization: "EARTech Information Technology",
+    date: "Issued Sep 2025",
     type: "Professional Certificate",
     credentialId: "6e9ae40f-644f-432e-84de-166fcc490525",
+    summary:
+      "Certificate of completion awarded by EarTech Information Technology for successfully completing a training program focused on artificial intelligence, coding, and cybersecurity.",
+    skills: [
+      "Artificial Intelligence (AI)",
+      "Hack the Box",
+      "Python (Programming Language)",
+    ],
   },
 ];

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Education } from "../../sections/Education";
 
@@ -60,8 +60,40 @@ describe("Education details", () => {
     const skills = screen.getByRole("list", {
       name: "RISE-MICCAI Summer School 2025 skills",
     });
-    expect(skills).toHaveTextContent("Artificial Intelligence");
+    expect(skills).toHaveTextContent("Artificial Intelligence (AI)");
     expect(skills).toHaveTextContent("Machine Learning");
-    expect(skills.children).toHaveLength(2);
+    expect(skills).toHaveTextContent("Computer Vision");
+    expect(skills).toHaveTextContent("Medical Imaging");
+    expect(skills.children).toHaveLength(4);
+  });
+
+  it("shows the provider, description, and skills for the AI and cybersecurity certificate", async () => {
+    const user = userEvent.setup();
+    render(<Education />);
+
+    await user.click(
+      screen.getByRole("button", {
+        name: "View details: Artificial Intelligence with Coding & Cybersecurity",
+      }),
+    );
+
+    const dialog = await screen.findByRole("dialog", {
+        name: "Artificial Intelligence with Coding & Cybersecurity",
+      });
+    expect(dialog).toBeVisible();
+    expect(within(dialog).getByText("EARTech Information Technology")).toBeInTheDocument();
+    expect(within(dialog).getByText("Issued Sep 2025")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Certificate of completion awarded by EarTech Information Technology for successfully completing a training program focused on artificial intelligence, coding, and cybersecurity.",
+      ),
+    ).toBeInTheDocument();
+    const skills = screen.getByRole("list", {
+      name: "Artificial Intelligence with Coding & Cybersecurity skills",
+    });
+    expect(skills).toHaveTextContent("Artificial Intelligence (AI)");
+    expect(skills).toHaveTextContent("Hack the Box");
+    expect(skills).toHaveTextContent("Python (Programming Language)");
+    expect(skills.children).toHaveLength(3);
   });
 });

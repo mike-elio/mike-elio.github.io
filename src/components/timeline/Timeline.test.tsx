@@ -38,10 +38,10 @@ describe("portfolio timelines", () => {
       }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("button", {
+      screen.getByRole("button", {
         name: "View details: Artificial Intelligence with Coding & Cybersecurity",
       }),
-    ).not.toBeInTheDocument();
+    ).toBeInTheDocument();
 
     const text = container.textContent ?? "";
     expect(text.indexOf("Artificial Intelligence with Coding & Cybersecurity")).toBeLessThan(
