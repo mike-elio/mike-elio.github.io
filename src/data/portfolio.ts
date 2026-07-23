@@ -337,6 +337,7 @@ export const education: readonly Education[] = [
       "Artificial Intelligence (AI)",
       "Hack the Box",
       "Python (Programming Language)",
+      "Network Security",
     ],
   },
 ];
