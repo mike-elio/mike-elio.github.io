@@ -23,14 +23,14 @@ export interface SkillGroup {
 
 export interface Experience {
   title: string;
-  project: string;
   organization: string;
+  employmentType: string;
   date: string;
-  context: "Academic project";
-  collaboration?: string;
+  duration: string;
+  location: string;
+  workArrangement: string;
   summary: string;
-  features: readonly string[];
-  tags: readonly string[];
+  skills: readonly string[];
 }
 
 interface ProjectBase {
@@ -137,36 +137,23 @@ export const skills: readonly SkillGroup[] = [
 
 export const experiences: readonly Experience[] = [
   {
-    title: "AI Engineer — Academic Graduation Project",
-    project: "Nahd Graduation Project",
-    organization: "Arab International University (AIU)",
-    date: "2025 — June 2026",
-    context: "Academic project",
-    collaboration: "Collaborative university project",
+    title: "Artificial Intelligence with Coding & Cybersecurity",
+    organization: "EARTech Information Technology",
+    employmentType: "Internship",
+    date: "Aug 2025 – Sep 2025",
+    duration: "2 mos",
+    location: "Syria",
+    workArrangement: "Remote",
     summary:
-      "Contributed to the AI layer of a coaching platform designed as a collaborative graduation project.",
-    features: [
-      "Path recommendation and explainable guidance",
-      "Technical fault diagnosis",
-      "Image-based task-proof verification",
-      "Voice Agent API integration",
+      "Completed a professional training program in Artificial Intelligence, Coding, and Cybersecurity. Built practical skills in Python, network security, secure software development, and hands-on cybersecurity exercises using Hack The Box, while exploring real-world AI applications.",
+    skills: [
+      "Python (Programming Language)",
+      "Front-End Web Development",
+      "Laravel",
+      "Hack The Box",
+      "Artificial Intelligence (AI)",
+      "Network Security",
     ],
-    tags: ["Applied AI", "Computer Vision", "Voice AI", "Backend APIs"],
-  },
-  {
-    title: "AI & Backend Engineer — Academic Project",
-    project: "AquaGuard Junior Project",
-    organization: "Arab International University (AIU)",
-    date: "June 2026",
-    context: "Academic project",
-    summary:
-      "Worked on AI and backend logic for a water-quality decision-support academic project.",
-    features: [
-      "Water quality scoring and prediction",
-      "Diagnostic reasoning around reported conditions",
-      "Verified provider recommendations and citizen routing",
-    ],
-    tags: ["Machine Learning", "Decision Support", "Backend AI"],
   },
 ];
 

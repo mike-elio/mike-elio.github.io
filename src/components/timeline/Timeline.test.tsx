@@ -3,18 +3,17 @@ import { Education } from "../../sections/Education";
 import { Experience } from "../../sections/Experience";
 
 describe("portfolio timelines", () => {
-  it("labels project work as academic and keeps chronological DOM order", () => {
-    const { container } = render(<Experience />);
+  it("renders a single professional internship timeline entry", () => {
+    render(<Experience />);
     expect(
-      screen.getByRole("heading", { level: 2, name: "Academic Project Experience" }),
+      screen.getByRole("heading", { level: 2, name: "Professional Experience" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByText("Academic project")).toHaveLength(2);
-    expect(screen.getByText("Collaborative university project")).toBeInTheDocument();
-
-    const text = container.textContent ?? "";
-    expect(text.indexOf("Nahd Graduation Project")).toBeLessThan(
-      text.indexOf("AquaGuard Junior Project"),
-    );
+    expect(screen.getAllByRole("article")).toHaveLength(1);
+    expect(screen.getByText("Syria · Remote")).toBeInTheDocument();
+    expect(
+      screen.getByText("EARTech Information Technology · Internship"),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Academic project")).not.toBeInTheDocument();
   });
 
   it("renders the exact degree, RISE-MICCAI, and existing certificate content", () => {

@@ -5,14 +5,12 @@ import { experiences } from "../data/portfolio";
 
 const items: readonly TimelineEntry[] = experiences.map((entry, index) => ({
   id: `experience-${index + 1}`,
-  title: entry.project,
-  subtitle: `${entry.title} · ${entry.organization}`,
-  date: entry.date,
-  context: entry.context,
-  collaboration: entry.collaboration,
+  title: entry.title,
+  subtitle: `${entry.organization} · ${entry.employmentType}`,
+  date: `${entry.date} · ${entry.duration}`,
+  context: `${entry.location} · ${entry.workArrangement}`,
   summary: entry.summary,
-  features: entry.features,
-  tags: entry.tags,
+  tags: entry.skills,
 }));
 
 export function Experience() {
@@ -22,11 +20,11 @@ export function Experience() {
         <SectionHeading
           id="experience-title"
           kicker="03 / Experience"
-          title="Academic Project Experience"
-          intro="Collaborative university work applying AI and backend engineering to concrete decision-support problems."
+          title="Professional Experience"
+          intro="Professional training across artificial intelligence, software development, and cybersecurity."
         />
       </Reveal>
-      <Timeline items={items} label="Academic project timeline" />
+      <Timeline items={items} label="Professional experience timeline" />
     </section>
   );
 }

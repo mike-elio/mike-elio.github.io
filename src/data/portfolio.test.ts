@@ -16,7 +16,7 @@ describe("portfolio data", () => {
       "Backend AI Developer",
     ]);
     expect(skills).toHaveLength(4);
-    expect(experiences).toHaveLength(2);
+    expect(experiences).toHaveLength(1);
     expect(projects).toHaveLength(5);
     expect(education).toHaveLength(3);
   });
@@ -51,7 +51,7 @@ describe("portfolio data", () => {
     ]);
   });
 
-  it("contains no email address or unsupported employment wording", () => {
+  it("contains the approved professional internship without unsupported wording", () => {
     const serialized = JSON.stringify({
       profile,
       skills,
@@ -62,8 +62,12 @@ describe("portfolio data", () => {
 
     expect(serialized).not.toMatch(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
     expect(serialized).not.toMatch(/employee|full-time|freelance client/i);
-    expect(experiences.every((entry) => entry.context === "Academic project")).toBe(
-      true,
-    );
+    expect(experiences[0]).toMatchObject({
+      title: "Artificial Intelligence with Coding & Cybersecurity",
+      organization: "EARTech Information Technology",
+      employmentType: "Internship",
+      location: "Syria",
+      workArrangement: "Remote",
+    });
   });
 });
