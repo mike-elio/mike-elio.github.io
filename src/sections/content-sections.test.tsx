@@ -45,7 +45,7 @@ describe("Experience", () => {
     expect(section.getByText("Syria · Remote")).toBeInTheDocument();
     expect(
       section.getByText(
-        "Completed a professional training program in Artificial Intelligence, Coding, and Cybersecurity. Built practical skills in Python, network security, secure software development, and hands-on cybersecurity exercises using Hack The Box, while exploring real-world AI applications.",
+        "Completed a two-month internship spanning six technical areas: Python, Front-End Web Development, Laravel, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
       ),
     ).toBeInTheDocument();
 
@@ -55,7 +55,7 @@ describe("Experience", () => {
       "Laravel",
       "Hack The Box",
       "Artificial Intelligence (AI)",
-      "Network Security",
+      "Microsoft Azure",
     ]) {
       expect(section.getByText(skill)).toBeInTheDocument();
     }
