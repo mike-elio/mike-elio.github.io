@@ -94,7 +94,8 @@ describe("Education details", () => {
     expect(skills).toHaveTextContent("Artificial Intelligence (AI)");
     expect(skills).toHaveTextContent("Hack the Box");
     expect(skills).toHaveTextContent("Python (Programming Language)");
-    expect(skills).toHaveTextContent("Network Security");
-    expect(skills.children).toHaveLength(4);
+    expect(skills).toHaveTextContent("Laravel");
+    expect(skills).toHaveTextContent("Microsoft Azure");
+    expect(skills.children).toHaveLength(5);
   });
 });
