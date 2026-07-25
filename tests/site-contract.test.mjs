@@ -487,7 +487,7 @@ test("deployment workflow uses locked installs, complete verification, pinned ac
 
   for (const command of [
     "npm ci",
-    "npm audit --audit-level=high",
+    "npm audit --omit=dev --audit-level=high",
     "npm run lint",
     "npm run typecheck",
     "npm test",
