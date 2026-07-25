@@ -44,6 +44,19 @@ describe("Projects", () => {
     });
   });
 
+  it("shows AquaGuard AI's public GitHub source link", async () => {
+    const user = userEvent.setup();
+    render(<Projects />);
+    await user.click(
+      screen.getByRole("button", { name: "View case study: AquaGuard AI" }),
+    );
+    expect(screen.getByRole("link", { name: "View source code" })).toMatchObject({
+      href: "https://github.com/mike-elio/AquaGuard-AI",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    });
+  });
+
   it("uses a dismissible viewport-modal fallback without showModal", async () => {
     const user = userEvent.setup();
     render(<Projects />);

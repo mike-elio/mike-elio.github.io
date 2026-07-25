@@ -200,7 +200,8 @@ export const projects: readonly Project[] = [
     slug: "aquaguard",
     title: "AquaGuard AI",
     eyebrow: "Academic case study",
-    visibility: "case-study",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",
     summary:
       "A water-quality decision-support concept combining prediction, diagnostic reasoning, and provider routing.",
     description:

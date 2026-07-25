@@ -31,7 +31,6 @@ describe("portfolio data", () => {
 
     expect(privateProjects.map((project) => project.title)).toEqual([
       "Nahd AI Coaching Platform",
-      "AquaGuard AI",
     ]);
     expect(
       publicProjects.map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
@@ -39,6 +38,10 @@ describe("portfolio data", () => {
       {
         slug: "goalpath",
         sourceUrl: "https://github.com/mike-elio/senior",
+      },
+      {
+        slug: "aquaguard",
+        sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",
       },
       {
         slug: "product-task-platform",
