@@ -28,7 +28,7 @@ export function Education() {
           id="education-title"
           kicker="05 / Education"
           title="Education & Certification"
-          intro="Academic foundations and focused training across AI, coding, and cybersecurity."
+          intro="Academic foundations and focused training across AI, coding, and Microsoft Azure."
         />
       </Reveal>
       <Timeline

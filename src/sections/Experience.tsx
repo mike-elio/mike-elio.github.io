@@ -21,7 +21,7 @@ export function Experience() {
           id="experience-title"
           kicker="03 / Experience"
           title="Professional Experience"
-          intro="Professional training across artificial intelligence, software development, and cybersecurity."
+          intro="Professional training across artificial intelligence, software development, and Microsoft Azure."
         />
       </Reveal>
       <Timeline items={items} label="Professional experience timeline" />
