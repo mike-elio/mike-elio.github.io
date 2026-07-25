@@ -177,26 +177,6 @@ export const projects: readonly Project[] = [
     technologies: ["Python", "FastAPI", "Computer Vision", "Voice AI"],
   },
   {
-    slug: "goalpath",
-    title: "GoalPath Expert System",
-    eyebrow: "Public AI system",
-    visibility: "public",
-    sourceUrl: "https://github.com/mike-elio/senior",
-    summary:
-      "An interview-driven expert system that produces explainable career-track recommendations and gap plans.",
-    description:
-      "GoalPath turns structured interview answers into fit scores, strengths, recommendation reasoning, and actionable next steps.",
-    contribution:
-      "Designed the explainable decision flow and delivered it through a typed FastAPI application with automated tests.",
-    features: [
-      "Structured interview flow",
-      "Explainable fit scoring",
-      "Strength and gap analysis",
-      "Typed API validation",
-    ],
-    technologies: ["Python", "FastAPI", "Pydantic", "pytest"],
-  },
-  {
     slug: "aquaguard",
     title: "AquaGuard AI",
     eyebrow: "Academic case study",

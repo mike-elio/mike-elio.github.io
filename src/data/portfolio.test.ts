@@ -17,7 +17,7 @@ describe("portfolio data", () => {
     ]);
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(1);
-    expect(projects).toHaveLength(5);
+    expect(projects).toHaveLength(4);
     expect(education).toHaveLength(3);
   });
 
@@ -35,10 +35,6 @@ describe("portfolio data", () => {
     expect(
       publicProjects.map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     ).toEqual([
-      {
-        slug: "goalpath",
-        sourceUrl: "https://github.com/mike-elio/senior",
-      },
       {
         slug: "aquaguard",
         sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",

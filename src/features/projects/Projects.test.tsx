@@ -4,9 +4,9 @@ import { vi } from "vitest";
 import { Projects } from "../../sections/Projects";
 
 describe("Projects", () => {
-  it("renders five fixed projects without a runtime GitHub dependency", () => {
+  it("renders four fixed projects without a runtime GitHub dependency", () => {
     render(<Projects />);
-    expect(screen.getAllByRole("article")).toHaveLength(5);
+    expect(screen.getAllByRole("article")).toHaveLength(4);
     expect(screen.getByText("Nahd AI Coaching Platform")).toBeInTheDocument();
     expect(screen.getByText("Game Discovery Platform")).toBeInTheDocument();
   });
@@ -29,19 +29,6 @@ describe("Projects", () => {
     await user.keyboard("{Escape}");
     await waitFor(() => expect(dialog).not.toHaveAttribute("open"));
     expect(trigger).toHaveFocus();
-  });
-
-  it("shows a safe source link for a public project", async () => {
-    const user = userEvent.setup();
-    render(<Projects />);
-    await user.click(
-      screen.getByRole("button", { name: "View case study: GoalPath Expert System" }),
-    );
-    expect(screen.getByRole("link", { name: "View source code" })).toMatchObject({
-      href: "https://github.com/mike-elio/senior",
-      target: "_blank",
-      rel: "noopener noreferrer",
-    });
   });
 
   it("shows AquaGuard AI's public GitHub source link", async () => {
