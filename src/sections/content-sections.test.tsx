@@ -45,14 +45,13 @@ describe("Experience", () => {
     expect(section.getByText("Syria · Remote")).toBeInTheDocument();
     expect(
       section.getByText(
-        "Completed a two-month internship spanning six technical areas: Python, Front-End Web Development, Laravel, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
+        "Completed a two-month internship spanning five technical areas: Python, Front-End Web Development, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
       ),
     ).toBeInTheDocument();
 
     for (const skill of [
       "Python (Programming Language)",
       "Front-End Web Development",
-      "Laravel",
       "Hack The Box",
       "Artificial Intelligence (AI)",
       "Microsoft Azure",
