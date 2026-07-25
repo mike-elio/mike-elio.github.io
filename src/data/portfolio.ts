@@ -119,7 +119,6 @@ export const skills: readonly SkillGroup[] = [
     items: [
       { label: "FastAPI" },
       { label: "Node.js" },
-      { label: "Laravel" },
       { label: "REST APIs" },
     ],
   },
@@ -145,11 +144,10 @@ export const experiences: readonly Experience[] = [
     location: "Syria",
     workArrangement: "Remote",
     summary:
-      "Completed a two-month internship spanning six technical areas: Python, Front-End Web Development, Laravel, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
+      "Completed a two-month internship spanning five technical areas: Python, Front-End Web Development, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
     skills: [
       "Python (Programming Language)",
       "Front-End Web Development",
-      "Laravel",
       "Hack The Box",
       "Artificial Intelligence (AI)",
       "Microsoft Azure",
@@ -324,7 +322,6 @@ export const education: readonly Education[] = [
       "Artificial Intelligence (AI)",
       "Hack the Box",
       "Python (Programming Language)",
-      "Laravel",
       "Microsoft Azure",
     ],
   },
