@@ -150,7 +150,7 @@ test("mobile navigation and the 320px contact layout remain keyboard usable", as
   }
 });
 
-test("private project dialog traps keyboard focus and restores its trigger", async ({
+test("public project dialog traps keyboard focus and restores its trigger", async ({
   page,
 }) => {
   await page.goto("/#projects");
@@ -168,7 +168,13 @@ test("private project dialog traps keyboard focus and restores its trigger", asy
   await expect(
     dialog.getByRole("button", { name: "Close project details" }),
   ).toBeFocused();
-  await expect(dialog.getByRole("link", { name: "View source code" })).toHaveCount(0);
+  const sourceLink = dialog.getByRole("link", { name: "View source code" });
+  await expect(sourceLink).toHaveAttribute(
+    "href",
+    "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
+  );
+  await page.keyboard.press("Tab");
+  await expect(sourceLink).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(
     dialog.getByRole("button", { name: "Close project details" }),
