@@ -357,6 +357,7 @@ test("published files are recursively classified and contain no private data", a
 
   const approvedGithubUrls = new Set([
     "https://github.com/mike-elio",
+    "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
     "https://github.com/mike-elio/AquaGuard-AI",
     "https://github.com/mike-elio/project-part2",
     "https://github.com/mike-elio/game-discovery-platform",
@@ -399,6 +400,10 @@ test("source relationships, palette, dependencies, and legacy removal are closed
       .filter((project) => project.visibility === "public")
       .map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     [
+      {
+        slug: "nahd",
+        sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
+      },
       {
         slug: "aquaguard",
         sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",
