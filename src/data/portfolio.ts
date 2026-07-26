@@ -100,17 +100,22 @@ export const skills: readonly SkillGroup[] = [
   {
     title: "Languages",
     icon: "code",
-    items: [{ label: "Python" }, { label: "JavaScript" }],
+    items: [
+      { label: "Python" },
+      { label: "JavaScript" },
+      { label: "HTML5" },
+    ],
   },
   {
     title: "AI & ML",
     icon: "brain",
     items: [
-      { label: "LLM Applications" },
+      { label: "Large Language Models (LLM)" },
       { label: "Machine Learning" },
       { label: "Deep Learning" },
-      { label: "NLP" },
+      { label: "Natural Language Processing (NLP)" },
       { label: "Computer Vision" },
+      { label: "Expert Systems" },
     ],
   },
   {
@@ -120,6 +125,7 @@ export const skills: readonly SkillGroup[] = [
       { label: "FastAPI" },
       { label: "Node.js" },
       { label: "REST APIs" },
+      { label: "Validation Processing" },
     ],
   },
   {
@@ -130,6 +136,8 @@ export const skills: readonly SkillGroup[] = [
       { label: "GitHub" },
       { label: "Docker" },
       { label: "Microsoft Azure", qualifier: "Advancing" },
+      { label: "Ollama" },
+      { label: "Software Development Life Cycle (SDLC)" },
     ],
   },
 ];
@@ -166,7 +174,7 @@ export const projects: readonly Project[] = [
     summary:
       "A collaborative AI coaching platform combining guidance, diagnosis, visual verification, and voice interaction.",
     description:
-      "Nahd was developed as a university graduation project to explore how several AI capabilities can support one coherent coaching workflow.",
+      "Nahd is an AI coaching platform that combines FastAPI, LLMs, NLP, Computer Vision, Machine Learning, and Expert Systems to deliver guided, validated learning workflows.",
     contribution:
       "Contributed to the AI layer across recommendation, diagnostic, image-verification, and voice-agent capabilities within the collaborative project.",
     features: [
@@ -175,7 +183,20 @@ export const projects: readonly Project[] = [
       "Image-based task-proof verification",
       "Voice Agent API integration",
     ],
-    technologies: ["Python", "FastAPI", "Computer Vision", "Voice AI"],
+    technologies: [
+      "Python",
+      "JavaScript",
+      "FastAPI",
+      "Large Language Models (LLM)",
+      "Computer Vision",
+      "Natural Language Processing (NLP)",
+      "HTML5",
+      "Ollama",
+      "Software Development Life Cycle (SDLC)",
+      "Machine Learning",
+      "Expert Systems",
+      "Validation Processing",
+    ],
   },
   {
     slug: "aquaguard",

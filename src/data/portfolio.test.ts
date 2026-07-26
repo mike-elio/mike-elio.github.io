@@ -52,6 +52,48 @@ describe("portfolio data", () => {
     ]);
   });
 
+  it("shows Nahd's verified AI stack without RAG", () => {
+    const nahd = projects.find((project) => project.slug === "nahd");
+    const skillLabels = skills.flatMap((group) =>
+      group.items.map((item) => item.label),
+    );
+
+    expect(nahd).toMatchObject({
+      description:
+        "Nahd is an AI coaching platform that combines FastAPI, LLMs, NLP, Computer Vision, Machine Learning, and Expert Systems to deliver guided, validated learning workflows.",
+      technologies: [
+        "Python",
+        "JavaScript",
+        "FastAPI",
+        "Large Language Models (LLM)",
+        "Computer Vision",
+        "Natural Language Processing (NLP)",
+        "HTML5",
+        "Ollama",
+        "Software Development Life Cycle (SDLC)",
+        "Machine Learning",
+        "Expert Systems",
+        "Validation Processing",
+      ],
+    });
+    expect(skillLabels).toEqual(
+      expect.arrayContaining([
+        "JavaScript",
+        "Validation Processing",
+        "FastAPI",
+        "Large Language Models (LLM)",
+        "Computer Vision",
+        "Natural Language Processing (NLP)",
+        "HTML5",
+        "Ollama",
+        "Software Development Life Cycle (SDLC)",
+        "Machine Learning",
+        "Expert Systems",
+      ]),
+    );
+    expect(JSON.stringify({ nahd, skills })).not.toContain("RAG");
+  });
+
   it("contains the approved professional internship without unsupported wording", () => {
     const serialized = JSON.stringify({
       profile,
