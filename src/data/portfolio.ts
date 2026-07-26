@@ -112,6 +112,7 @@ export const skills: readonly SkillGroup[] = [
     items: [
       { label: "Large Language Models (LLM)" },
       { label: "Machine Learning" },
+      { label: "Data Preprocessing" },
       { label: "Deep Learning" },
       { label: "Natural Language Processing (NLP)" },
       { label: "Computer Vision" },

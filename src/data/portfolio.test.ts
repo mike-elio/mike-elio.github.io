@@ -88,6 +88,7 @@ describe("portfolio data", () => {
         "Ollama",
         "Software Development Life Cycle (SDLC)",
         "Machine Learning",
+        "Data Preprocessing",
         "Expert Systems",
       ]),
     );
