@@ -11,7 +11,7 @@ describe("Projects", () => {
     expect(screen.getByText("Game Discovery Platform")).toBeInTheDocument();
   });
 
-  it("opens a private case study without a source action and restores focus", async () => {
+  it("shows Nahd AI Coaching Platform's public GitHub source link", async () => {
     const user = userEvent.setup();
     render(<Projects />);
     const trigger = screen.getByRole("button", {
@@ -24,11 +24,11 @@ describe("Projects", () => {
     });
     expect(dialog).toBeVisible();
     expect(dialog).toHaveAttribute("aria-modal", "true");
-    expect(screen.queryByRole("link", { name: /source code/i })).not.toBeInTheDocument();
-
-    await user.keyboard("{Escape}");
-    await waitFor(() => expect(dialog).not.toHaveAttribute("open"));
-    expect(trigger).toHaveFocus();
+    expect(screen.getByRole("link", { name: "View source code" })).toMatchObject({
+      href: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    });
   });
 
   it("shows AquaGuard AI's public GitHub source link", async () => {

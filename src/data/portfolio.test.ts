@@ -21,7 +21,7 @@ describe("portfolio data", () => {
     expect(education).toHaveLength(3);
   });
 
-  it("allows repository actions only for verified public projects", () => {
+  it("links verified public projects to their repositories", () => {
     const privateProjects = projects.filter(
       (project) => project.visibility === "case-study",
     );
@@ -29,12 +29,14 @@ describe("portfolio data", () => {
       (project) => project.visibility === "public",
     );
 
-    expect(privateProjects.map((project) => project.title)).toEqual([
-      "Nahd AI Coaching Platform",
-    ]);
+    expect(privateProjects).toEqual([]);
     expect(
       publicProjects.map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     ).toEqual([
+      {
+        slug: "nahd",
+        sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
+      },
       {
         slug: "aquaguard",
         sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",

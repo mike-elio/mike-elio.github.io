@@ -160,7 +160,8 @@ export const projects: readonly Project[] = [
     slug: "nahd",
     title: "Nahd AI Coaching Platform",
     eyebrow: "Flagship academic case study",
-    visibility: "case-study",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
     featured: true,
     summary:
       "A collaborative AI coaching platform combining guidance, diagnosis, visual verification, and voice interaction.",
