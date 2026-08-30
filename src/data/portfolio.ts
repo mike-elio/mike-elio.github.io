@@ -200,6 +200,41 @@ export const projects: readonly Project[] = [
     ],
   },
   {
+    slug: "tool-guide",
+    title: "Adaptive AI Tool Guide",
+    eyebrow: "Public AI recommendation system",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/toolguide",
+    summary:
+      "An evidence-backed bilingual AI tool recommendation system with adaptive questions and explainable Top-3 results.",
+    description:
+      "The system scopes decisions across Analysis, Design, Implementation, and Testing for Software, Artificial Intelligence, and Cybersecurity. It uses deterministic stateless questionnaire sessions, source-backed knowledge, CLIPS-backed rule inference, and optional local Ollama classification for unresolved free-text answers.",
+    contribution:
+      "Built the end-to-end recommendation workflow, FastAPI backend, bilingual interface, validated knowledge catalog, rule inference, automated tests, audits, and questionnaire simulation tooling.",
+    features: [
+      "48 curated tools across 12 stage/domain pools",
+      "6–10 adaptive source-backed questions",
+      "Top-3 explainable recommendations with match scores, limitations, confidence, and official sources",
+      "Arabic and English responsive interface",
+      "Deterministic stateless questionnaire sessions",
+      "Local-first intent classification with curated aliases and optional Ollama fallback",
+      "250/250 simulated FastAPI sessions completed with 0 failures across all 12 pools",
+    ],
+    technologies: [
+      "Python",
+      "FastAPI",
+      "JavaScript",
+      "HTML5",
+      "Expert Systems",
+      "CLIPS",
+      "Ollama",
+      "Gemma 3 1B",
+      "REST APIs",
+      "Pytest",
+      "Node.js",
+    ],
+  },
+  {
     slug: "aquaguard",
     title: "AquaGuard AI",
     eyebrow: "Academic case study",

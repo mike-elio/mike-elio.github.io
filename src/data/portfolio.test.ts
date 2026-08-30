@@ -17,7 +17,7 @@ describe("portfolio data", () => {
     ]);
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(1);
-    expect(projects).toHaveLength(4);
+    expect(projects).toHaveLength(5);
     expect(education).toHaveLength(3);
   });
 
@@ -36,6 +36,10 @@ describe("portfolio data", () => {
       {
         slug: "nahd",
         sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
+      },
+      {
+        slug: "tool-guide",
+        sourceUrl: "https://github.com/mike-elio/toolguide",
       },
       {
         slug: "aquaguard",
