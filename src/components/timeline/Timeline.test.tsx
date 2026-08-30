@@ -3,12 +3,16 @@ import { Education } from "../../sections/Education";
 import { Experience } from "../../sections/Experience";
 
 describe("portfolio timelines", () => {
-  it("renders a single professional internship timeline entry", () => {
+  it("renders professional internship timeline entries", () => {
     render(<Experience />);
     expect(
       screen.getByRole("heading", { level: 2, name: "Professional Experience" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByRole("article")).toHaveLength(1);
+    expect(screen.getAllByRole("article")).toHaveLength(2);
+    expect(screen.getByText("New York City Metropolitan Area · Remote")).toBeInTheDocument();
+    expect(
+      screen.getByText("FlyRank AI · Internship"),
+    ).toBeInTheDocument();
     expect(screen.getByText("Syria · Remote")).toBeInTheDocument();
     expect(
       screen.getByText("EARTech Information Technology · Internship"),

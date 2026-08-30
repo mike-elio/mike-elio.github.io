@@ -49,7 +49,7 @@ describe("Experience", () => {
       ),
     ).toBeInTheDocument();
     expect(section.getByText("Backend AI Engineering")).toBeInTheDocument();
-    expect(section.getByText("Artificial Intelligence (AI)")).toBeInTheDocument();
+    expect(section.getAllByText("Artificial Intelligence (AI)")).toHaveLength(2);
 
     expect(
       section.getByRole("heading", {
@@ -73,7 +73,6 @@ describe("Experience", () => {
       "Python (Programming Language)",
       "Front-End Web Development",
       "Hack The Box",
-      "Artificial Intelligence (AI)",
       "Microsoft Azure",
     ]) {
       expect(section.getByText(skill)).toBeInTheDocument();
