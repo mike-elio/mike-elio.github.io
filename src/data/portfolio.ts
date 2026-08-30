@@ -145,6 +145,18 @@ export const skills: readonly SkillGroup[] = [
 
 export const experiences: readonly Experience[] = [
   {
+    title: "Backend AI Engineer - Intern",
+    organization: "FlyRank AI",
+    employmentType: "Internship",
+    date: "Aug 2026 – Present",
+    duration: "1 mo",
+    location: "New York City Metropolitan Area",
+    workArrangement: "Remote",
+    summary:
+      "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
+    skills: ["Backend AI Engineering", "Artificial Intelligence (AI)"],
+  },
+  {
     title: "Artificial Intelligence with Coding & Cybersecurity",
     organization: "EARTech Information Technology",
     employmentType: "Internship",
