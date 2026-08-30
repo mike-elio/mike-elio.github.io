@@ -32,6 +32,26 @@ describe("Experience", () => {
       section.getByRole("heading", { name: "Professional Experience" }),
     ).toBeInTheDocument();
     expect(
+      section.getByRole("heading", { name: "Backend AI Engineer - Intern" }),
+    ).toBeInTheDocument();
+    expect(
+      section.getByText("FlyRank AI · Internship"),
+    ).toBeInTheDocument();
+    expect(
+      section.getByText("Aug 2026 – Present · 1 mo"),
+    ).toBeInTheDocument();
+    expect(
+      section.getByText("New York City Metropolitan Area · Remote"),
+    ).toBeInTheDocument();
+    expect(
+      section.getByText(
+        "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
+      ),
+    ).toBeInTheDocument();
+    expect(section.getByText("Backend AI Engineering")).toBeInTheDocument();
+    expect(section.getByText("Artificial Intelligence (AI)")).toBeInTheDocument();
+
+    expect(
       section.getByRole("heading", {
         name: "Artificial Intelligence with Coding & Cybersecurity",
       }),

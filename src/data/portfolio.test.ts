@@ -16,7 +16,7 @@ describe("portfolio data", () => {
       "Backend AI Developer",
     ]);
     expect(skills).toHaveLength(4);
-    expect(experiences).toHaveLength(1);
+    expect(experiences).toHaveLength(2);
     expect(projects).toHaveLength(5);
     expect(education).toHaveLength(3);
   });
@@ -111,6 +111,18 @@ describe("portfolio data", () => {
     expect(serialized).not.toMatch(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
     expect(serialized).not.toMatch(/employee|full-time|freelance client/i);
     expect(experiences[0]).toMatchObject({
+      title: "Backend AI Engineer - Intern",
+      organization: "FlyRank AI",
+      employmentType: "Internship",
+      date: "Aug 2026 – Present",
+      duration: "1 mo",
+      location: "New York City Metropolitan Area",
+      workArrangement: "Remote",
+      summary:
+        "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
+      skills: ["Backend AI Engineering", "Artificial Intelligence (AI)"],
+    });
+    expect(experiences[1]).toMatchObject({
       title: "Artificial Intelligence with Coding & Cybersecurity",
       organization: "EARTech Information Technology",
       employmentType: "Internship",
