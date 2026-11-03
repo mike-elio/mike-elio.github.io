@@ -50,8 +50,8 @@ describe("portfolio timelines", () => {
     expect(text.indexOf("Artificial Intelligence with Coding & Cybersecurity")).toBeLessThan(
       text.indexOf("RISE-MICCAI Summer School 2025"),
     );
-    expect(text.indexOf("RISE-MICCAI Summer School 2025")).toBeLessThan(
-      text.indexOf("Bachelor of Engineering, Artificial Intelligence"),
+    expect(text.indexOf("Bachelor of Engineering, Artificial Intelligence")).toBeLessThan(
+      text.indexOf("RISE-MICCAI Summer School 2025"),
     );
   });
 });

@@ -231,3 +231,48 @@ test("has no serious or critical automated accessibility findings", async ({
   await trigger.click();
   expect(await blockingAxeViolations(page)).toEqual([]);
 });
+
+test("certificate previews load and enlarge with keyboard dismissal", async ({ page }) => {
+  await page.goto("/#education");
+  const previews = page.locator(".certificate-preview");
+  await expect(previews).toHaveCount(4);
+  for (const preview of await previews.all()) {
+    await preview.scrollIntoViewIfNeeded();
+    const thumbnail = preview.locator("img");
+    await expect(thumbnail).toBeVisible();
+    await expect.poll(() => thumbnail.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await preview.click();
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    const original = dialog.locator(".certificate-full img");
+    await expect.poll(() => original.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+    await expect(dialog.getByRole("link", { name: "Open original image in a new tab" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(preview).toBeFocused();
+  }
+  await page.setViewportSize({ width: 320, height: 760 });
+  await previews.first().click();
+  const mobileDialog = page.getByRole("dialog");
+  await expect(mobileDialog).toBeVisible();
+  const imageBox = await mobileDialog.locator(".certificate-full img").boundingBox();
+  expect(imageBox).not.toBeNull();
+  expect(imageBox!.x).toBeGreaterThanOrEqual(0);
+  expect(imageBox!.x + imageBox!.width).toBeLessThanOrEqual(321);
+  await page.keyboard.press("Escape");
+});
+
+test("skills expand without removed labels or mobile overflow", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 760 });
+  await page.goto("/#skills");
+  const skillsSection = page.locator("#skills");
+  await expect(skillsSection.getByText("Feature Engineering", { exact: true })).toHaveCount(0);
+  await expect(skillsSection.getByText("Advancing", { exact: true })).toHaveCount(0);
+  await expect(skillsSection.getByText("Prompt Engineering", { exact: true })).toHaveCount(0);
+  await skillsSection.getByRole("button", { name: "View all skills" }).click();
+  await expect(skillsSection.getByText("Prompt Engineering", { exact: true })).toBeVisible();
+  await expect(skillsSection.getByText("Feature Engineering", { exact: true })).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(1);
+  await skillsSection.getByRole("button", { name: "Show core skills" }).click();
+  await expect(skillsSection.getByText("Prompt Engineering", { exact: true })).toHaveCount(0);
+});

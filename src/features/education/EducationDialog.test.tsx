@@ -3,6 +3,22 @@ import userEvent from "@testing-library/user-event";
 import { Education } from "../../sections/Education";
 
 describe("Education details", () => {
+  it("loads original certificate on enlargement and restores focus on dismissal", async () => {
+    const user = userEvent.setup();
+    render(<Education />);
+    const preview = screen.getByRole("img", { name: "SharafAI certificate: Fake Image Detector — Certificate of Participation" });
+    expect(preview).toHaveAttribute("loading", "lazy");
+    expect(screen.queryByAltText(/SharafAI original/)).not.toBeInTheDocument();
+    const trigger = screen.getByRole("button", { name: "Enlarge certificate: Fake Image Detector — Certificate of Participation" });
+    await user.click(trigger);
+    const dialog = screen.getByRole("dialog", { name: "Fake Image Detector — Certificate of Participation" });
+    expect(within(dialog).getByRole("img")).toHaveAttribute("src", "/assets/certificates/sharafai.jpg");
+    expect(within(dialog).getByRole("link", { name: "Open original image in a new tab" })).toHaveAttribute("href", "/assets/certificates/sharafai.jpg");
+    await user.keyboard("{Escape}");
+    await waitFor(() => expect(dialog).not.toHaveAttribute("open"));
+    expect(trigger).toHaveFocus();
+  });
+
   it("opens complete degree details and restores focus after Escape", async () => {
     const user = userEvent.setup();
     render(<Education />);

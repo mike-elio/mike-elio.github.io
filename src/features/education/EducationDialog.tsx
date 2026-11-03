@@ -84,6 +84,21 @@ export function EducationDialog({
             <span>{entry.date}</span>
             {entry.grade ? <span>{entry.grade}</span> : null}
           </p>
+          {entry.certificateImage ? (
+            <figure className="certificate-full">
+              <img
+                src={entry.certificateImage.original}
+                alt={`${entry.organization} original certificate: ${entry.title}`}
+                width={entry.certificateImage.width}
+                height={entry.certificateImage.height}
+                decoding="async"
+              />
+              <figcaption>
+                <a href={entry.certificateImage.original} target="_blank" rel="noopener noreferrer">Open original image in a new tab</a>
+              </figcaption>
+            </figure>
+          ) : null}
+          {entry.verificationUrl ? <a href={entry.verificationUrl} target="_blank" rel="noopener noreferrer">Verify credential</a> : null}
           {entry.summary ? (
             <p id="education-dialog-description">{entry.summary}</p>
           ) : null}

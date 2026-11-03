@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { About } from "./About";
 import { Experience } from "./Experience";
 import { Skills } from "./Skills";
@@ -11,12 +11,19 @@ describe("About and Skills", () => {
     expect(screen.queryByText(/years of experience/i)).not.toBeInTheDocument();
   });
 
-  it("shows four skill groups and qualifies Azure", () => {
+  it("shows compact skills, expands the full list, and omits removed labels", () => {
     render(<Skills />);
     expect(screen.getAllByRole("article")).toHaveLength(4);
-    expect(screen.getByText("Microsoft Azure").parentElement).toHaveTextContent(
-      "Advancing",
-    );
+    expect(screen.getByText("Microsoft Azure")).toBeInTheDocument();
+    expect(screen.queryByText("Advancing")).not.toBeInTheDocument();
+    expect(screen.queryByText("Feature Engineering")).not.toBeInTheDocument();
+    expect(screen.queryByText("Prompt Engineering")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "View all skills" }));
+    expect(screen.getByText("Prompt Engineering")).toBeInTheDocument();
+    expect(screen.queryByText("Feature Engineering")).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Show core skills" })).toHaveAttribute("aria-expanded", "true");
+    fireEvent.click(screen.getByRole("button", { name: "Show core skills" }));
+    expect(screen.queryByText("Prompt Engineering")).not.toBeInTheDocument();
   });
 });
 

@@ -17,7 +17,6 @@ export interface SkillGroup {
   icon: "code" | "brain" | "server" | "tools";
   items: ReadonlyArray<{
     label: string;
-    qualifier?: "Advancing";
   }>;
 }
 
@@ -64,6 +63,8 @@ export interface Education {
   date: string;
   type: "Degree" | "Professional Certificate";
   credentialId?: string;
+  certificateImage?: { thumbnail: string; original: string; width: number; height: number };
+  verificationUrl?: string;
   grade?: string;
   activities?: string;
   summary?: string;
@@ -122,7 +123,6 @@ export const skills: readonly SkillGroup[] = [
       { label: "Hugging Face Transformers" },
       { label: "scikit-learn" },
       { label: "Model Evaluation" },
-      { label: "Feature Engineering" },
       { label: "Prompt Engineering" },
     ],
   },
@@ -148,7 +148,7 @@ export const skills: readonly SkillGroup[] = [
       { label: "Git" },
       { label: "GitHub" },
       { label: "Docker" },
-      { label: "Microsoft Azure", qualifier: "Advancing" },
+      { label: "Microsoft Azure" },
       { label: "Ollama" },
       { label: "MLOps Fundamentals" },
       { label: "OpenAI Codex" },
@@ -388,6 +388,7 @@ export const education: readonly Education[] = [
   },
   {
     slug: "rise-miccai-summer-school-2025",
+    certificateImage: { thumbnail: "/assets/certificates/rise-miccai-thumb.jpg", original: "/assets/certificates/rise-miccai.jpg", width: 1280, height: 939 },
     title: "RISE-MICCAI Summer School 2025",
     organization: "RISE-MICCAI",
     date: "Issued Jul 2025",
@@ -403,6 +404,7 @@ export const education: readonly Education[] = [
   },
   {
     slug: "ai-coding-cybersecurity-certificate",
+    certificateImage: { thumbnail: "/assets/certificates/eartech-thumb.jpg", original: "/assets/certificates/eartech.jpg", width: 802, height: 620 },
     title: "Artificial Intelligence with Coding & Cybersecurity",
     organization: "EARTech Information Technology",
     date: "Issued Sep 2025",
@@ -419,6 +421,7 @@ export const education: readonly Education[] = [
   },
   {
     slug: "ai-fluency-framework-foundations",
+    certificateImage: { thumbnail: "/assets/certificates/anthropic-thumb.jpg", original: "/assets/certificates/anthropic.png", width: 1925, height: 1487 },
     title: "AI Fluency: Framework & Foundations",
     organization: "Anthropic",
     date: "Aug 2026",
@@ -428,6 +431,7 @@ export const education: readonly Education[] = [
   },
   {
     slug: "fake-image-detector-certificate",
+    certificateImage: { thumbnail: "/assets/certificates/sharafai-thumb.jpg", original: "/assets/certificates/sharafai.jpg", width: 1286, height: 908 },
     title: "Fake Image Detector — Certificate of Participation",
     organization: "SharafAI",
     date: "Issued Oct 2026",
