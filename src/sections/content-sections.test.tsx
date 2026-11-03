@@ -38,14 +38,14 @@ describe("Experience", () => {
       section.getByText("FlyRank AI · Internship"),
     ).toBeInTheDocument();
     expect(
-      section.getByText("Aug 2026 – Present · 1 mo"),
+      section.getByText("Aug 2026 – Present · Ongoing"),
     ).toBeInTheDocument();
     expect(
       section.getByText("New York City Metropolitan Area · Remote"),
     ).toBeInTheDocument();
     expect(
       section.getByText(
-        "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
+        "Backend AI engineering internship with hands-on work in Python model development, supervised and unsupervised learning, data preprocessing, exploratory analysis, and deployment practices under mentorship. Applying Express.js, SQL, and prompt engineering.",
       ),
     ).toBeInTheDocument();
     expect(section.getByText("Backend AI Engineering")).toBeInTheDocument();
@@ -62,10 +62,10 @@ describe("Experience", () => {
     expect(
       section.getByText("Aug 2025 – Sep 2025 · 2 mos"),
     ).toBeInTheDocument();
-    expect(section.getByText("Syria · Remote")).toBeInTheDocument();
+    expect(section.getByText("Istanbul, Türkiye · Remote")).toBeInTheDocument();
     expect(
       section.getByText(
-        "Completed a two-month internship spanning five technical areas: Python, Front-End Web Development, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
+        "Completed 92 hours of practical training in Python, applied AI, web development, cybersecurity, and Microsoft Azure. Completed 5 Hack The Box labs, 4 small projects, and more than 10 coding exercises.",
       ),
     ).toBeInTheDocument();
 

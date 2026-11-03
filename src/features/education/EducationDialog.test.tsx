@@ -54,7 +54,7 @@ describe("Education details", () => {
     ).toBeVisible();
     expect(
       screen.getByText(
-        "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025.",
+        "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025, with 10 hours covering medical imaging, deep learning, computer vision, and AI research.",
       ),
     ).toBeInTheDocument();
     const skills = screen.getByRole("list", {
@@ -85,7 +85,7 @@ describe("Education details", () => {
     expect(within(dialog).getByText("Issued Sep 2025")).toBeInTheDocument();
     expect(
       screen.getByText(
-        "Certificate of completion awarded by EarTech Information Technology for successfully completing a training program focused on artificial intelligence, coding, and cybersecurity.",
+        "Certificate of completion awarded by EarTech Information Technology for successfully completing 92 hours of training focused on Python, applied AI, web development, and cybersecurity.",
       ),
     ).toBeInTheDocument();
     const skills = screen.getByRole("list", {

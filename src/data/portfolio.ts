@@ -74,13 +74,13 @@ export interface Education {
 
 export const profile: Profile = {
   name: "Mike Eliovits",
-  title: "AI Engineer",
+  title: "Backend AI Engineer",
   eyebrow: "Hello, I'm",
   positioning:
     "I build practical AI systems that explain their decisions and ship as usable products.",
   summary:
-    "I work across LLM applications, natural language processing, computer vision, and reliable backend delivery.",
-  availability: "Open to AI/ML & Backend AI opportunities",
+    "I develop and evaluate AI models with PyTorch, Hugging Face Transformers, and scikit-learn, and integrate them through reliable FastAPI services. My work spans LLM applications, NLP, computer vision, and backend development.",
+  availability: "Open to AI/ML & Backend AI opportunities · Remote & relocation",
   roles: [
     "AI Engineer",
     "LLM Application Builder",
@@ -103,6 +103,7 @@ export const skills: readonly SkillGroup[] = [
     items: [
       { label: "Python" },
       { label: "JavaScript" },
+      { label: "SQL" },
       { label: "HTML5" },
     ],
   },
@@ -117,6 +118,12 @@ export const skills: readonly SkillGroup[] = [
       { label: "Natural Language Processing (NLP)" },
       { label: "Computer Vision" },
       { label: "Expert Systems" },
+      { label: "PyTorch" },
+      { label: "Hugging Face Transformers" },
+      { label: "scikit-learn" },
+      { label: "Model Evaluation" },
+      { label: "Feature Engineering" },
+      { label: "Prompt Engineering" },
     ],
   },
   {
@@ -125,6 +132,11 @@ export const skills: readonly SkillGroup[] = [
     items: [
       { label: "FastAPI" },
       { label: "Node.js" },
+      { label: "Express.js" },
+      { label: "Pydantic" },
+      { label: "pytest" },
+      { label: "JSON Schema" },
+      { label: "Model Deployment" },
       { label: "REST APIs" },
       { label: "Validation Processing" },
     ],
@@ -138,6 +150,10 @@ export const skills: readonly SkillGroup[] = [
       { label: "Docker" },
       { label: "Microsoft Azure", qualifier: "Advancing" },
       { label: "Ollama" },
+      { label: "MLOps Fundamentals" },
+      { label: "OpenAI Codex" },
+      { label: "Claude Code" },
+      { label: "Google Antigravity" },
       { label: "Software Development Life Cycle (SDLC)" },
     ],
   },
@@ -149,12 +165,12 @@ export const experiences: readonly Experience[] = [
     organization: "FlyRank AI",
     employmentType: "Internship",
     date: "Aug 2026 – Present",
-    duration: "1 mo",
+    duration: "Ongoing",
     location: "New York City Metropolitan Area",
     workArrangement: "Remote",
     summary:
-      "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
-    skills: ["Backend AI Engineering", "Artificial Intelligence (AI)"],
+      "Backend AI engineering internship with hands-on work in Python model development, supervised and unsupervised learning, data preprocessing, exploratory analysis, and deployment practices under mentorship. Applying Express.js, SQL, and prompt engineering.",
+    skills: ["Backend AI Engineering", "Artificial Intelligence (AI)", "Express.js", "Prompt Engineering", "SQL"],
   },
   {
     title: "Artificial Intelligence with Coding & Cybersecurity",
@@ -162,10 +178,10 @@ export const experiences: readonly Experience[] = [
     employmentType: "Internship",
     date: "Aug 2025 – Sep 2025",
     duration: "2 mos",
-    location: "Syria",
+    location: "Istanbul, Türkiye",
     workArrangement: "Remote",
     summary:
-      "Completed a two-month internship spanning five technical areas: Python, Front-End Web Development, Hack The Box, Artificial Intelligence, and Microsoft Azure, strengthening my knowledge and practical skills in these technologies by an estimated 20%.",
+      "Completed 92 hours of practical training in Python, applied AI, web development, cybersecurity, and Microsoft Azure. Completed 5 Hack The Box labs, 4 small projects, and more than 10 coding exercises.",
     skills: [
       "Python (Programming Language)",
       "Front-End Web Development",
@@ -177,6 +193,27 @@ export const experiences: readonly Experience[] = [
 ];
 
 export const projects: readonly Project[] = [
+  {
+    slug: "fake-image-detector",
+    title: "Fake Image Detector",
+    eyebrow: "SharafAI · Jul – Sep 2026",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/image-detection-fake",
+    summary:
+      "A computer-vision project for detecting fake images, with ConvNeXt training and deployed FastAPI inference.",
+    description:
+      "Developed with SharafAI using 121,000 images from SID_Set. The model achieved 94.24% accuracy on the local test set.",
+    contribution:
+      "Contributed to data collection and ConvNeXt training in PyTorch, implemented the FastAPI backend, and deployed model inference. Collaborated with a teammate who built the Streamlit UI, then integrated and validated the full workflow.",
+    features: [
+      "ConvNeXt training in PyTorch",
+      "121,000-image SID_Set dataset",
+      "94.24% local test accuracy",
+      "FastAPI model inference and deployment",
+      "Integration with a teammate-built Streamlit interface",
+    ],
+    technologies: ["Python", "PyTorch", "Computer Vision", "FastAPI", "Model Deployment"],
+  },
   {
     slug: "nahd",
     title: "Nahd AI Coaching Platform",
@@ -195,6 +232,9 @@ export const projects: readonly Project[] = [
       "Technical fault diagnosis",
       "Image-based task-proof verification",
       "Voice Agent API integration",
+      "ModernBERT fault classification: F1 0.8880 and Recall@3 0.9648",
+      "Proof verification: accuracy 0.7628 and Macro-F1 0.7621",
+      "GoalPath validation: 71/71 pytest tests passed; Pydantic and JSON Schema response contracts",
     ],
     technologies: [
       "Python",
@@ -253,18 +293,19 @@ export const projects: readonly Project[] = [
     visibility: "public",
     sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",
     summary:
-      "A water-quality decision-support concept combining prediction, diagnostic reasoning, and provider routing.",
+      "A water-quality platform combining WQI prediction, rule-based diagnosis, and Top-5 provider recommendations.",
     description:
-      "AquaGuard explored how AI and backend logic can organize reported water conditions into understandable guidance and verified next steps.",
+      "Built an end-to-end WQI pipeline covering data cleaning, preprocessing, feature engineering, training, and evaluation. Benchmarked TensorFlow neural networks and scikit-learn models, selected Random Forest, and deployed the platform to a server.",
     contribution:
       "Worked on water-quality scoring, diagnostic rules, and backend flows that connect citizens with verified providers.",
     features: [
       "Water quality scoring",
       "Condition prediction",
       "Diagnostic reasoning",
-      "Verified provider routing",
+      "Top-5 provider recommendations through APIs",
+      "Random Forest evaluation: R² 0.9999, MAE 0.0142, RMSE 0.1524",
     ],
-    technologies: ["Machine Learning", "Python", "Backend AI", "REST APIs"],
+    technologies: ["Machine Learning", "Python", "TensorFlow", "scikit-learn", "Random Forest", "REST APIs"],
   },
   {
     slug: "product-task-platform",
@@ -352,7 +393,7 @@ export const education: readonly Education[] = [
     date: "Issued Jul 2025",
     type: "Professional Certificate",
     summary:
-      "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025.",
+      "Certificate of Completion for attending the RISE-MICCAI Summer School, held from July 14–18, 2025, with 10 hours covering medical imaging, deep learning, computer vision, and AI research.",
     skills: [
       "Artificial Intelligence (AI)",
       "Machine Learning",
@@ -368,12 +409,30 @@ export const education: readonly Education[] = [
     type: "Professional Certificate",
     credentialId: "6e9ae40f-644f-432e-84de-166fcc490525",
     summary:
-      "Certificate of completion awarded by EarTech Information Technology for successfully completing a training program focused on artificial intelligence, coding, and cybersecurity.",
+      "Certificate of completion awarded by EarTech Information Technology for successfully completing 92 hours of training focused on Python, applied AI, web development, and cybersecurity.",
     skills: [
       "Artificial Intelligence (AI)",
       "Hack the Box",
       "Python (Programming Language)",
       "Microsoft Azure",
     ],
+  },
+  {
+    slug: "ai-fluency-framework-foundations",
+    title: "AI Fluency: Framework & Foundations",
+    organization: "Anthropic",
+    date: "Aug 2026",
+    type: "Professional Certificate",
+    summary: "Completed 4 hours of training in the 4D Framework and responsible AI use.",
+    skills: ["AI Fluency", "Responsible AI", "4D Framework"],
+  },
+  {
+    slug: "fake-image-detector-certificate",
+    title: "Fake Image Detector — Certificate of Participation",
+    organization: "SharafAI",
+    date: "Issued Oct 2026",
+    type: "Professional Certificate",
+    summary: "Certificate of Participation in the Fake Image Detector project at SharafAI.",
+    skills: ["Python (Programming Language)", "PyTorch", "Computer Vision", "FastAPI", "Model Deployment"],
   },
 ];

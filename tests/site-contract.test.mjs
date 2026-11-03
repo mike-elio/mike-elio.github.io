@@ -357,6 +357,7 @@ test("published files are recursively classified and contain no private data", a
 
   const approvedGithubUrls = new Set([
     "https://github.com/mike-elio",
+    "https://github.com/mike-elio/image-detection-fake",
     "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
     "https://github.com/mike-elio/toolguide",
     "https://github.com/mike-elio/AquaGuard-AI",
@@ -401,6 +402,10 @@ test("source relationships, palette, dependencies, and legacy removal are closed
       .filter((project) => project.visibility === "public")
       .map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     [
+      {
+        slug: "fake-image-detector",
+        sourceUrl: "https://github.com/mike-elio/image-detection-fake",
+      },
       {
         slug: "nahd",
         sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",

@@ -36,10 +36,12 @@ export function About() {
             APIs.
           </p>
           <p>
-            My work spans model and decision logic, explainable product behavior,
-            computer-vision workflows, and backend integration. I care about
-            systems that remain useful beyond a demo and can be improved safely
-            over time.
+            I am an Artificial Intelligence Engineering graduate from Arab
+            International University (2026, GPA 3.23/4.00), based in Damascus
+            and a Greek/EU citizen open to remote work and relocation. My work
+            spans NLP, computer vision, generative AI, and testable backend
+            services, with hands-on experience in PyTorch, Hugging Face,
+            scikit-learn, and FastAPI.
           </p>
           <ul aria-label="Verified profile facts" className="fact-row">
             {facts.map((fact) => (

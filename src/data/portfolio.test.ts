@@ -17,8 +17,8 @@ describe("portfolio data", () => {
     ]);
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(2);
-    expect(projects).toHaveLength(5);
-    expect(education).toHaveLength(3);
+    expect(projects).toHaveLength(6);
+    expect(education).toHaveLength(5);
   });
 
   it("links verified public projects to their repositories", () => {
@@ -33,6 +33,10 @@ describe("portfolio data", () => {
     expect(
       publicProjects.map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     ).toEqual([
+      {
+        slug: "fake-image-detector",
+        sourceUrl: "https://github.com/mike-elio/image-detection-fake",
+      },
       {
         slug: "nahd",
         sourceUrl: "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
@@ -115,18 +119,18 @@ describe("portfolio data", () => {
       organization: "FlyRank AI",
       employmentType: "Internship",
       date: "Aug 2026 – Present",
-      duration: "1 mo",
+      duration: "Ongoing",
       location: "New York City Metropolitan Area",
       workArrangement: "Remote",
       summary:
-        "Currently interning at FlyRank AI as an AI intern, focusing on Backend AI Engineering.",
-      skills: ["Backend AI Engineering", "Artificial Intelligence (AI)"],
+        "Backend AI engineering internship with hands-on work in Python model development, supervised and unsupervised learning, data preprocessing, exploratory analysis, and deployment practices under mentorship. Applying Express.js, SQL, and prompt engineering.",
+      skills: ["Backend AI Engineering", "Artificial Intelligence (AI)", "Express.js", "Prompt Engineering", "SQL"],
     });
     expect(experiences[1]).toMatchObject({
       title: "Artificial Intelligence with Coding & Cybersecurity",
       organization: "EARTech Information Technology",
       employmentType: "Internship",
-      location: "Syria",
+      location: "Istanbul, Türkiye",
       workArrangement: "Remote",
     });
   });

@@ -13,7 +13,7 @@ describe("portfolio timelines", () => {
     expect(
       screen.getByText("FlyRank AI · Internship"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Syria · Remote")).toBeInTheDocument();
+    expect(screen.getByText("Istanbul, Türkiye · Remote")).toBeInTheDocument();
     expect(
       screen.getByText("EARTech Information Technology · Internship"),
     ).toBeInTheDocument();

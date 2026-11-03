@@ -4,9 +4,9 @@ import { vi } from "vitest";
 import { Projects } from "../../sections/Projects";
 
 describe("Projects", () => {
-  it("renders five fixed projects without a runtime GitHub dependency", () => {
+  it("renders six fixed projects without a runtime GitHub dependency", () => {
     render(<Projects />);
-    expect(screen.getAllByRole("article")).toHaveLength(5);
+    expect(screen.getAllByRole("article")).toHaveLength(6);
     expect(screen.getByText("Nahd AI Coaching Platform")).toBeInTheDocument();
     expect(screen.getByText("Adaptive AI Tool Guide")).toBeInTheDocument();
     expect(screen.getByText("Game Discovery Platform")).toBeInTheDocument();
