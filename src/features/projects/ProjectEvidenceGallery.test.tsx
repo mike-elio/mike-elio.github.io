@@ -7,13 +7,13 @@ describe("Project visual evidence", () => {
     render(<Projects />);
 
     expect(screen.getByRole("img", { name: "Adaptive AI Tool Guide screenshot preview" }))
-      .toHaveAttribute("src", "/assets/projects/toolguide-home.webp");
+      .toHaveAttribute("src", "/assets/projects/2026-11-08/Adaptive-AI-Tool-Guide--COVER.webp");
     expect(screen.getByRole("img", { name: "Nahd AI Coaching Platform screenshot preview" }))
-      .toHaveAttribute("src", "/assets/projects/nahd-home.webp");
+      .toHaveAttribute("src", "/assets/projects/2026-11-08/Nahd-AI--COVER.webp");
     expect(screen.getByRole("img", { name: "AquaGuard AI screenshot preview" }))
-      .toHaveAttribute("src", "/assets/projects/aquaguard-docs.webp");
+      .toHaveAttribute("src", "/assets/projects/2026-11-08/AquaGuard-AI--COVER.webp");
     expect(screen.getByRole("img", { name: "Fake Image Detector screenshot preview" }))
-      .toHaveAttribute("src", "/assets/projects/fake-detector-accuracy.webp");
+      .toHaveAttribute("src", "/assets/projects/2026-11-08/Fake-Image-Detector--COVER.webp");
     expect(screen.queryByRole("img", { name: "Game Discovery Platform screenshot preview" }))
       .not.toBeInTheDocument();
   });
@@ -28,10 +28,10 @@ describe("Project visual evidence", () => {
     const dialog = screen.getByRole("dialog", { name: "Fake Image Detector" });
     expect(within(dialog).getByRole("heading", { name: "Project visuals & evidence" }))
       .toBeInTheDocument();
-    expect(within(dialog).getByText(/historical notebook outputs/i))
+    expect(within(dialog).getByText(/Historical ConvNeXt notebook evaluation visualizations/i))
       .toBeInTheDocument();
-    expect(within(dialog).getByRole("link", { name: /Final experiment accuracy/i }))
-      .toHaveAttribute("href", "/assets/projects/fake-detector-accuracy.webp");
+    expect(within(dialog).getByRole("link", { name: /Five experiments compared/i }))
+      .toHaveAttribute("href", "/assets/projects/2026-11-08/Fake-Image-Detector--COVER.webp");
   });
 
   it("displays an API-only evidence disclaimer for AquaGuard", async () => {
@@ -40,9 +40,9 @@ describe("Project visual evidence", () => {
     await user.click(screen.getByRole("button", { name: "View case study: AquaGuard AI" }));
 
     const dialog = screen.getByRole("dialog", { name: "AquaGuard AI" });
-    expect(within(dialog).getByText(/rule-based diagnosis/i))
+    expect(within(dialog).getByText(/rule-based FastAPI diagnosis/i))
       .toBeInTheDocument();
     expect(within(dialog).getByRole("img", { name: /Water quality diagnosis response/i }))
-      .toHaveAttribute("src", "/assets/projects/aquaguard-diagnosis.webp");
+      .toHaveAttribute("src", "/assets/projects/2026-11-08/AquaGuard-AI--04-thermal-stress-request-response.webp");
   });
 });
