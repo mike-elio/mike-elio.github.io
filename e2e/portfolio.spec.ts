@@ -172,6 +172,16 @@ test("public project dialog traps keyboard focus and restores its trigger", asyn
     "href",
     "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
   );
+  // The screenshot gallery adds keyboard-accessible links before the source link.
+  const screenshotLinks = dialog.getByRole("link", {
+    name: /open full-size screenshot/i,
+  });
+  const screenshotCount = await screenshotLinks.count();
+  expect(screenshotCount).toBeGreaterThan(0);
+  for (let index = 0; index < screenshotCount; index += 1) {
+    await page.keyboard.press("Tab");
+    await expect(screenshotLinks.nth(index)).toBeFocused();
+  }
   await page.keyboard.press("Tab");
   await expect(sourceLink).toBeFocused();
   await page.keyboard.press("Tab");

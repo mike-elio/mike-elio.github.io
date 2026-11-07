@@ -36,3 +36,9 @@ jobs:
         run: npm run test:contract
       - name: Bundle budget
         run: npm run check:bundle
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Browser acceptance
+        env:
+          EXPECTED_FORMSPREE_FORM_ID: ${{ vars.VITE_FORMSPREE_FORM_ID }}
+        run: npm run test:e2e
