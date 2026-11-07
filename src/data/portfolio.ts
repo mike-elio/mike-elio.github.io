@@ -253,9 +253,9 @@ export const projects: readonly Project[] = [
     visibility: "public",
     sourceUrl: "https://github.com/mike-elio/toolguide",
     summary:
-      "An evidence-backed bilingual AI tool recommendation system with adaptive questions and explainable Top-3 results.",
+      "An evidence-backed bilingual system that evaluates 192 tools and delivers explainable recommendations through adaptive questions and side-by-side comparisons.",
     description:
-      "The system scopes decisions across Analysis, Design, Implementation, and Testing for Software, Artificial Intelligence, and Cybersecurity. It uses deterministic stateless questionnaire sessions, source-backed knowledge, CLIPS-backed rule inference, and optional local Ollama classification for unresolved free-text answers.",
+      "Built a bilingual (Arabic and English) decision-support platform for selecting software, AI, and cybersecurity tools across Analysis, Design, Implementation, and Testing. Its deterministic, stateless FastAPI questionnaire asks 6–10 adaptive questions and ranks up to three eligible tools, with source-backed reasoning, limitations, and confidence indicators. The CLIPS-backed inference engine enforces documented requirements, while side-by-side comparisons, 192 practical starter guides, and what-if scenario previews help users make informed choices. Optional local Ollama handles ambiguous free-text responses without cloud API keys.",
     contribution:
       "Built the end-to-end recommendation workflow, FastAPI backend, bilingual interface, validated knowledge catalog, rule inference, automated tests, audits, and questionnaire simulation tooling.",
     features: [
