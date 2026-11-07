@@ -259,7 +259,7 @@ export const projects: readonly Project[] = [
     contribution:
       "Built the end-to-end recommendation workflow, FastAPI backend, bilingual interface, validated knowledge catalog, rule inference, automated tests, audits, and questionnaire simulation tooling.",
     features: [
-      "48 curated tools across 12 stage/domain pools",
+      "192 catalog tools across 12 stage/domain pools",
       "6–10 adaptive source-backed questions",
       "Top-3 explainable recommendations with match scores, limitations, confidence, and official sources",
       "Arabic and English responsive interface",
