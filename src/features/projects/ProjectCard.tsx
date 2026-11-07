@@ -11,7 +11,7 @@ export function ProjectCard({
   onOpen: (trigger: HTMLButtonElement) => void;
 }) {
   return (
-    <article className={project.featured ? "project-card project-card--featured" : "project-card"}>
+    <article id={`project-${project.slug}`} className={project.featured ? "project-card project-card--featured" : "project-card"}>
       <div className="project-card-meta">
         <span>{String(index + 1).padStart(2, "0")}</span>
         <span>{project.visibility === "public" ? "Public project" : "Case study"}</span>

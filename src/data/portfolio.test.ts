@@ -9,12 +9,7 @@ import {
 describe("portfolio data", () => {
   it("contains the approved identity and section inventory", () => {
     expect(profile.name).toBe("Mike Eliovits");
-    expect(profile.roles).toEqual([
-      "AI Engineer",
-      "LLM Application Builder",
-      "NLP & Machine Learning Engineer",
-      "Backend AI Developer",
-    ]);
+    expect(profile.roles).toEqual(["AI Backend Engineer"]);
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(2);
     expect(projects).toHaveLength(6);

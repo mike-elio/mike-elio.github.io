@@ -1,7 +1,6 @@
 import { Footer } from "./components/layout/Footer";
 import { PageMotionController } from "./components/motion/PageMotionController";
 import { Header } from "./components/navigation/Header";
-import { About } from "./sections/About";
 import { Contact } from "./sections/Contact";
 import { Education } from "./sections/Education";
 import { Experience } from "./sections/Experience";
@@ -17,7 +16,6 @@ export function App() {
       <Header />
       <main id="main" tabIndex={-1}>
         <Hero />
-        <About />
         <Skills />
         <Experience />
         <Projects />

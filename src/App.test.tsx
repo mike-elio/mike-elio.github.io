@@ -18,7 +18,6 @@ describe("App", () => {
     );
     expect(sectionIds).toEqual([
       "top",
-      "about",
       "skills",
       "experience",
       "projects",

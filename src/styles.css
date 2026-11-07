@@ -598,3 +598,24 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
   .certificate-copy { padding: 1.1rem; }
   .skills-grid { gap: 1rem; }
 }
+
+/* Unified introduction: generous reading rhythm and linked project evidence. */
+.hero { row-gap: 3rem; }
+.hero-role { margin-top: 1.25rem; margin-bottom: 2rem; }
+.hero-positioning { line-height: 1.45; margin-bottom: 1.5rem; }
+.hero-summary { font-size: clamp(1.1rem, 1.45vw, 1.25rem); line-height: 1.85; }
+.hero-purpose { margin-top: 1.25rem; }
+.hero-location { margin-top: 1.75rem; margin-bottom: .75rem; color: var(--accent-light); font-size: 1rem; line-height: 1.7; font-weight: 650; }
+.hero .availability { line-height: 1.7; font-size: 1rem; }
+.hero .availability span { flex-shrink: 0; }
+.hero-achievements { position: relative; z-index: 2; grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin: 0; padding: 2rem 0 0; border-top: 1px solid var(--line-strong); list-style: none; }
+.hero-achievements li { min-width: 0; }
+.hero-achievements a { display: flex; flex-direction: column; gap: .65rem; height: 100%; color: var(--muted-strong); text-decoration: none; line-height: 1.7; }
+.hero-achievements strong { color: var(--text); font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.45; }
+.hero-achievements .achievement-project { color: var(--accent-light); font-size: 1rem; font-weight: 650; }
+.hero-achievements a:hover .achievement-project { text-decoration: underline; text-underline-offset: .25em; }
+#about, .project-card[id] { scroll-margin-top: calc(var(--header-height) + 2rem); }
+@media (max-width: 767px) {
+  .hero-achievements { grid-template-columns: 1fr; gap: 1.75rem; }
+  .hero-achievements li + li { border-top: 1px solid var(--line); padding-top: 1.75rem; }
+}

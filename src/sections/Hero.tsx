@@ -17,7 +17,7 @@ export function Hero({
   return (
     <section aria-labelledby="hero-title" className="hero" id="top">
       <AnimatedBackground reduced={reduced} />
-      <div className="hero-copy">
+      <div className="hero-copy" id="about">
         <p className="hero-eyebrow">{profile.eyebrow}</p>
         <h1 id="hero-title">{profile.name}</h1>
         <p className="hero-role">
@@ -27,6 +27,11 @@ export function Hero({
         </p>
         <p className="hero-positioning">{profile.positioning}</p>
         <p className="hero-summary">{profile.summary}</p>
+        <p className="hero-summary hero-purpose">
+          Combining analytical thinking &amp; thoughtful engineering, I build
+          intelligent applications with measurable results.
+        </p>
+        <p className="hero-location">✦ Greek/EU Citizen · Based in Damascus</p>
         <p className="availability">
           <span aria-hidden="true" />
           {profile.availability}
@@ -54,6 +59,29 @@ export function Hero({
       <div className="hero-visual">
         <PortraitOrbit />
       </div>
+      <ul aria-label="Selected project achievements" className="hero-achievements">
+        <li>
+          <a href="#project-fake-image-detector">
+            <span className="achievement-project">Fake Image Detector</span>
+            <strong>94.24% accuracy</strong>
+            <span>Fake-image detection · Local test set</span>
+          </a>
+        </li>
+        <li>
+          <a href="#project-nahd">
+            <span className="achievement-project">Nahd AI Coaching Platform</span>
+            <strong>0.888 F1</strong>
+            <span>Technical fault diagnosis</span>
+          </a>
+        </li>
+        <li>
+          <a href="#project-tool-guide">
+            <span className="achievement-project">Adaptive AI Tool Guide</span>
+            <strong>250/250 simulated API sessions</strong>
+            <span>Completed without failures · Across 12 pools</span>
+          </a>
+        </li>
+      </ul>
     </section>
   );
 }

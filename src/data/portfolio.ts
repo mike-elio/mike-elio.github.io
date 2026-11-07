@@ -75,19 +75,14 @@ export interface Education {
 
 export const profile: Profile = {
   name: "Mike Eliovits",
-  title: "Backend AI Engineer",
+  title: "AI Backend Engineer",
   eyebrow: "Hello, I'm",
   positioning:
-    "I build practical AI systems that explain their decisions and ship as usable products.",
+    "I don’t just explore the possibilities of Artificial Intelligence.",
   summary:
-    "I develop and evaluate AI models with PyTorch, Hugging Face Transformers, and scikit-learn, and integrate them through reliable FastAPI services. My work spans LLM applications, NLP, computer vision, and backend development.",
-  availability: "Open to AI/ML & Backend AI opportunities · Remote & relocation",
-  roles: [
-    "AI Engineer",
-    "LLM Application Builder",
-    "NLP & Machine Learning Engineer",
-    "Backend AI Developer",
-  ],
+    "I develop and evaluate models across Generative AI, LLMs, NLP, and Computer Vision, integrating them through reliable FastAPI backends.",
+  availability: "Open to AI/ML & Backend AI opportunities · Remote & Relocation",
+  roles: ["AI Backend Engineer"],
   social: [
     { label: "GitHub", url: "https://github.com/mike-elio" },
     {

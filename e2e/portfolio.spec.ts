@@ -4,7 +4,6 @@ import { installSaveDataMock, installTurnstileMock } from "./helpers";
 
 const sectionIds = [
   "top",
-  "about",
   "skills",
   "experience",
   "projects",
@@ -47,7 +46,7 @@ test("renders every portfolio section in semantic order without browser errors",
       sections.map((section) => section.id),
     ),
   ).toEqual(sectionIds);
-  await expect(page.getByRole("heading", { level: 2 })).toHaveCount(6);
+  await expect(page.getByRole("heading", { level: 2 })).toHaveCount(5);
   expect(consoleErrors).toEqual([]);
   expect(pageErrors).toEqual([]);
 });
