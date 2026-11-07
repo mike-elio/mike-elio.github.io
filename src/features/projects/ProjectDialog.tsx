@@ -2,6 +2,7 @@ import type { RefObject } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import { useFocusTrap } from "../../components/navigation/useFocusTrap";
 import { TagList } from "../../components/ui/TagList";
+import { ProjectEvidenceGallery } from "./ProjectEvidenceGallery";
 import type { Project } from "../../data/portfolio";
 
 export function ProjectDialog({
@@ -84,6 +85,7 @@ export function ProjectDialog({
           <p className="project-eyebrow">{project.eyebrow}</p>
           <h2 id="project-dialog-title">{project.title}</h2>
           <p id="project-dialog-description">{project.description}</p>
+          <ProjectEvidenceGallery project={project} />
           <section aria-labelledby="project-contribution-title">
             <h3 id="project-contribution-title">My contribution</h3>
             <p>{project.contribution}</p>

@@ -1,5 +1,6 @@
 import type { Project } from "../../data/portfolio";
 import { TagList } from "../../components/ui/TagList";
+import { getProjectEvidence } from "./ProjectEvidenceGallery";
 
 export function ProjectCard({
   project,
@@ -10,12 +11,24 @@ export function ProjectCard({
   index: number;
   onOpen: (trigger: HTMLButtonElement) => void;
 }) {
+  const cover = getProjectEvidence(project.slug)?.images[0];
+
   return (
     <article id={`project-${project.slug}`} className={project.featured ? "project-card project-card--featured" : "project-card"}>
       <div className="project-card-meta">
         <span>{String(index + 1).padStart(2, "0")}</span>
         <span>{project.visibility === "public" ? "Public project" : "Case study"}</span>
       </div>
+      {cover ? (
+        <div className="project-card-cover">
+          <img
+            src={cover.src}
+            alt={project.title + " screenshot preview"}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ) : null}
       <p className="project-eyebrow">{project.eyebrow}</p>
       <h3>{project.title}</h3>
       <p>{project.summary}</p>
