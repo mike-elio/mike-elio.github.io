@@ -28,6 +28,9 @@ jobs:
       - name: Component tests
         run: npm test
       - name: Build
+        env:
+          VITE_FORMSPREE_FORM_ID: ${{ vars.VITE_FORMSPREE_FORM_ID }}
+          VITE_TURNSTILE_SITE_KEY: ${{ vars.VITE_TURNSTILE_SITE_KEY }}
         run: npm run build
       - name: Static contracts
         run: npm run test:contract
