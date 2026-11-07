@@ -12,34 +12,41 @@ interface EvidenceCollection {
 
 const evidenceBySlug: Readonly<Record<string, EvidenceCollection>> = {
   "tool-guide": {
-    note: "Real screenshots from a locally running web application. Match scores are catalog-based fit indicators, not AI prediction accuracy.",
+    note: "Real screenshots from a locally running web application. Match scores are catalog-based fit indicators, not AI prediction accuracy. The complete comparison and what-if sections use contiguous scroll captures; the original low confidence and undocumented capabilities are preserved.",
     images: [
-      { src: "/assets/projects/toolguide-home.webp", title: "Project stage selection", alt: "Tool Guide application home and project-stage selection" },
-      { src: "/assets/projects/toolguide-question.webp", title: "Adaptive questionnaire", alt: "Tool Guide adaptive architecture selection question" },
-      { src: "/assets/projects/toolguide-recommendations.webp", title: "Explainable recommendation", alt: "Tool Guide recommendation card with reasons and fit indicator" },
+      { src: "/assets/projects/improved/Adaptive-AI-Tool-Guide--COVER.png", title: "Explainable CrewAI recommendation", alt: "Tool Guide CrewAI recommendation with actual match, low confidence, reasons, limitations and source" },
+      { src: "/assets/projects/improved/Adaptive-AI-Tool-Guide--10-complete-homepage.png", title: "Project stage selection", alt: "Tool Guide complete homepage and project-stage selection" },
+      { src: "/assets/projects/improved/Adaptive-AI-Tool-Guide--17-complete-ai-comparison-section.png", title: "Compare AI tools", alt: "CrewAI, LlamaIndex and Transformers comparison with documented capabilities and unknowns" },
+      { src: "/assets/projects/improved/Adaptive-AI-Tool-Guide--18-complete-what-if-recommendations.png", title: "What-if recommendation comparison", alt: "Original and open-source-required scenario recommendations shown side by side" },
     ],
   },
   nahd: {
     note: "Real screenshots of the independently runnable GoalPath Career Expert feature. The recommendation and fit score use illustrative interview answers; other Nahd modules are not represented here.",
     images: [
-      { src: "/assets/projects/nahd-home.webp", title: "Choose a career domain", alt: "GoalPath Expert System home screen and domain selection" },
-      { src: "/assets/projects/nahd-recommendation.webp", title: "Recommended track and fit score", alt: "GoalPath AI Foundations Track recommendation and sample fit score" },
-      { src: "/assets/projects/nahd-plan.webp", title: "Gap-resolution plan", alt: "GoalPath suggested Python, math, practice and tooling steps" },
-      { src: "/assets/projects/nahd-api.webp", title: "Documented REST endpoints", alt: "GoalPath FastAPI OpenAPI endpoints" },
+      { src: "/assets/projects/improved/Nahd-AI--COVER.png", title: "Recommended track, fit score and gap plan", alt: "GoalPath AI Foundations Track recommendation with 62 percent sample fit, reasoning, strengths and personalized gap plan" },
+      { src: "/assets/projects/improved/Nahd-AI--03-goalpath-home-desktop.png", title: "Choose a career domain", alt: "GoalPath Expert System homepage and three career-domain options" },
+      { src: "/assets/projects/improved/Nahd-AI--02-python-interview-complete.png", title: "Complete interview question", alt: "GoalPath Python experience question with all answers and navigation visible" },
+      { src: "/assets/projects/improved/Nahd-AI--06-rag-retrieval-track-preference.png", title: "NLP and RAG specialization", alt: "GoalPath NLP style question with RAG retrieval selected and all options visible" },
     ],
   },
   aquaguard: {
-    note: "Verified live FastAPI screenshots of a rule-based diagnosis with illustrative input values. These do not demonstrate a newly rerun machine-learning predictor.",
+    note: "Actual locally executed FastAPI request and response evidence for rule-based diagnosis with illustrative water samples. These images are capture reports separate from the application, not a product frontend or a newly rerun machine-learning predictor.",
     images: [
-      { src: "/assets/projects/aquaguard-docs.webp", title: "OpenAPI diagnosis endpoint", alt: "AquaGuard API documentation showing POST diagnose endpoint" },
-      { src: "/assets/projects/aquaguard-diagnosis.webp", title: "Water quality diagnosis response", alt: "Water quality diagnosis response with successful HTTP 200 and cause messages" },
+      { src: "/assets/projects/improved/AquaGuard-AI--COVER.png", title: "Water quality diagnosis response", alt: "Water quality diagnosis response with actual HTTP 200, organic-load request, symptoms and likely causes" },
+      { src: "/assets/projects/improved/AquaGuard-AI--01-agricultural-runoff-request-response.png", title: "Nutrient enrichment diagnosis", alt: "Actual AquaGuard request and response for nutrient enrichment and likely agricultural runoff" },
+      { src: "/assets/projects/improved/AquaGuard-AI--04-thermal-stress-request-response.png", title: "Thermal stress diagnosis", alt: "Actual AquaGuard request and response identifying thermal stress and oxygen depletion" },
+      { src: "/assets/projects/improved/AquaGuard-AI--05-chemical-contamination-request-response.png", title: "Chemical contamination diagnosis", alt: "Actual AquaGuard request and response for extreme ammonia and abnormal pH" },
     ],
   },
   "fake-image-detector": {
-    note: "Historical notebook outputs from ConvNeXt experiments, not a newly rerun model. The checkpoint and dataset were unavailable for fresh inference.",
+    note: "Historical notebook outputs from all five ConvNeXt experiments, replotted from saved rounded training logs with source-cell labels, not a newly rerun model. Validation and test metrics are distinct; the checkpoint and dataset were unavailable for fresh inference.",
     images: [
-      { src: "/assets/projects/fake-detector-accuracy.webp", title: "Final experiment accuracy", alt: "Experiment five training and validation accuracy plots" },
-      { src: "/assets/projects/fake-detector-validation.webp", title: "Validation accuracy progression", alt: "Experiment five saved validation accuracy curve" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--COVER.png", title: "Recorded experiment comparison", alt: "Best recorded validation accuracy across all five ConvNeXt experiments with separate historical test accuracy" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--21-experiment-05-complete-learning-curves.png", title: "Experiment 5: ConvNeXt-Base, 121,000 images", alt: "Experiment five recorded training and validation accuracy and loss, best validation accuracy 94.45 percent" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--22-experiment-01-recorded-learning-curves.png", title: "Experiment 1: ConvNeXt-Base, 3,976 images", alt: "Experiment 1 recorded training and validation accuracy and loss from the saved notebook" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--22-experiment-02-recorded-learning-curves.png", title: "Experiment 2: ConvNeXt-Small, 3,976 images", alt: "Experiment 2 recorded training and validation accuracy and loss from the saved notebook" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--22-experiment-03-recorded-learning-curves.png", title: "Experiment 3: ConvNeXt-Small, 50,000 images", alt: "Experiment 3 recorded training and validation accuracy and loss from the saved notebook" },
+      { src: "/assets/projects/improved/Fake-Image-Detector--22-experiment-04-recorded-learning-curves.png", title: "Experiment 4: ConvNeXt-Base, 50,000 images", alt: "Experiment 4 recorded training and validation accuracy and loss from the saved notebook" },
     ],
   },
 };
