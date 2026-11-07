@@ -1,6 +1,6 @@
 import type { Project } from "../../data/portfolio";
 import { TagList } from "../../components/ui/TagList";
-import { getProjectEvidence } from "./ProjectEvidenceGallery";
+import { getProjectEvidence } from "./projectEvidenceData";
 
 export function ProjectCard({
   project,
