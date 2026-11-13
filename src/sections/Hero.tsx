@@ -1,3 +1,4 @@
+import { DataFlow } from "../components/motion/DataFlow";
 import { AnimatedBackground } from "../components/motion/AnimatedBackground";
 import { PortraitOrbit } from "../components/motion/PortraitOrbit";
 import { useMotionBudget } from "../components/motion/useMotionBudget";
@@ -58,6 +59,7 @@ export function Hero({
       </div>
       <div className="hero-visual">
         <PortraitOrbit />
+        <DataFlow reduced={reduced} />
       </div>
       <ul aria-label="Selected project achievements" className="hero-achievements">
         <li>

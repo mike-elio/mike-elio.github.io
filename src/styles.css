@@ -619,3 +619,39 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
   .hero-achievements { grid-template-columns: 1fr; gap: 1.75rem; }
   .hero-achievements li + li { border-top: 1px solid var(--line); padding-top: 1.75rem; }
 }
+
+/* Selected data-highway motif: portrait above, decorative motion below. */
+.hero-visual {
+  align-self: start;
+  gap: clamp(1rem, 2vw, 2rem);
+  width: 100%;
+}
+.hero-data-flow {
+  width: 100%;
+  max-width: 520px;
+  pointer-events: none;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+.hero-data-flow svg { display: block; width: 100%; height: auto; }
+.data-flow-track { stroke: #36dcb2; stroke-opacity: .18; stroke-width: 1; }
+.data-flow-pulse {
+  stroke: #72f1d0;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-dasharray: 3 97;
+  animation: hero-data-stream 5.4s linear infinite;
+}
+@keyframes hero-data-stream {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+.hero-data-flow[data-reduced="true"] .data-flow-pulse,
+html[data-motion="reduced"] .data-flow-pulse { animation: none; stroke-dashoffset: 45; }
+html[data-page-visibility="hidden"] .data-flow-pulse { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .data-flow-pulse { animation: none; stroke-dashoffset: 45; }
+}
+@media (max-width: 760px) {
+  .hero-data-flow { max-width: 420px; }
+}
