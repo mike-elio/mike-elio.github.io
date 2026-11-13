@@ -631,12 +631,12 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
   max-width: 520px;
   pointer-events: none;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent);
 }
 .hero-data-flow svg { display: block; width: 100%; height: auto; }
-.data-flow-track { stroke: #36dcb2; stroke-opacity: .18; stroke-width: 1; }
+.data-flow-track { stroke: var(--accent); stroke-opacity: .18; stroke-width: 1; }
 .data-flow-pulse {
-  stroke: #72f1d0;
+  stroke: var(--accent-light);
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 3 97;
