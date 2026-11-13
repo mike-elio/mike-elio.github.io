@@ -637,9 +637,10 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
 .data-flow-track { stroke: var(--accent); stroke-opacity: .18; stroke-width: 1; }
 .data-flow-pulse {
   stroke: var(--accent-light);
-  stroke-width: 2.5;
+  stroke-width: 2.75;
   stroke-linecap: round;
-  stroke-dasharray: 3 97;
+  stroke-dasharray: 6 94;
+  filter: drop-shadow(0 0 3px rgb(255 178 118 / 45%));
   animation: hero-data-stream 5.4s linear infinite;
 }
 @keyframes hero-data-stream {
@@ -647,10 +648,10 @@ html[data-motion="reduced"] .reveal { opacity: 1; transform: none; transition: n
   to { stroke-dashoffset: 0; }
 }
 .hero-data-flow[data-reduced="true"] .data-flow-pulse,
-html[data-motion="reduced"] .data-flow-pulse { animation: none; stroke-dashoffset: 45; }
+html[data-motion="reduced"] .data-flow-pulse { animation: none; }
 html[data-page-visibility="hidden"] .data-flow-pulse { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
-  .data-flow-pulse { animation: none; stroke-dashoffset: 45; }
+  .data-flow-pulse { animation: none; }
 }
 @media (max-width: 760px) {
   .hero-data-flow { max-width: 420px; }
