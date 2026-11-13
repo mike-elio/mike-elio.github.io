@@ -653,6 +653,20 @@ html[data-page-visibility="hidden"] .data-flow-pulse { animation-play-state: pau
 @media (prefers-reduced-motion: reduce) {
   .data-flow-pulse { animation: none; }
 }
+/* Enlarged desktop data highway: full-size packets stay beside the copy. */
+@media (min-width: 1280px) {
+  .hero-visual .portrait-orbit-wrap {
+    transform: translate(3.5rem, -3.5rem);
+    margin-bottom: -3.5rem;
+  }
+  .hero-data-flow {
+    width: 200%;
+    max-width: 1040px;
+    justify-self: start;
+    transform: translateX(-8%);
+  }
+}
+
 @media (max-width: 760px) {
   .hero-data-flow { max-width: 420px; }
 }
