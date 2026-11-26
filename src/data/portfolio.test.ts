@@ -12,7 +12,7 @@ describe("portfolio data", () => {
     expect(profile.roles).toEqual(["AI Backend Engineer"]);
     expect(skills).toHaveLength(4);
     expect(experiences).toHaveLength(3);
-    expect(projects).toHaveLength(9);
+    expect(projects).toHaveLength(7);
     expect(education).toHaveLength(6);
   });
 
@@ -55,14 +55,6 @@ describe("portfolio data", () => {
       {
         slug: "aquaguard",
         sourceUrl: "https://github.com/mike-elio/AquaGuard-AI",
-      },
-      {
-        slug: "product-task-platform",
-        sourceUrl: "https://github.com/mike-elio/project-part2",
-      },
-      {
-        slug: "game-discovery",
-        sourceUrl: "https://github.com/mike-elio/game-discovery-platform",
       },
     ]);
   });

@@ -357,52 +357,6 @@ export const projects: readonly Project[] = [
     ],
     technologies: ["Machine Learning", "Python", "TensorFlow", "scikit-learn", "Random Forest", "REST APIs"],
   },
-  {
-    slug: "product-task-platform",
-    title: "Product & Task Management Platform",
-    eyebrow: "Public backend project",
-    visibility: "public",
-    sourceUrl: "https://github.com/mike-elio/project-part2",
-    summary:
-      "A Laravel application organizing product, task, and user workflows through structured backend models.",
-    description:
-      "The project demonstrates server-rendered application structure, relational data workflows, and maintainable product and task operations.",
-    contribution:
-      "Implemented the application workflows and data relationships with Laravel and Eloquent.",
-    features: [
-      "Product workflows",
-      "Task lifecycle management",
-      "User-oriented operations",
-      "Relational data modeling",
-    ],
-    technologies: ["Laravel", "Eloquent", "Vite"],
-  },
-  {
-    slug: "game-discovery",
-    title: "Game Discovery Platform",
-    eyebrow: "Public frontend project",
-    visibility: "public",
-    sourceUrl: "https://github.com/mike-elio/game-discovery-platform",
-    summary:
-      "A responsive game-discovery interface with category browsing, search, filtering, and reusable components.",
-    description:
-      "The platform focuses on clear discovery flows, responsive interaction, and component-driven frontend composition.",
-    contribution:
-      "Built the React interface and data-query experience across browsing, searching, and filtering states.",
-    features: [
-      "Category browsing",
-      "Search and filtering",
-      "Responsive cards",
-      "Query-state handling",
-    ],
-    technologies: [
-      "React",
-      "Vite",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "React Query",
-    ],
-  },
 ];
 
 export const education: readonly Education[] = [

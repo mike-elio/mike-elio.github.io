@@ -14,7 +14,7 @@ describe("Project visual evidence", () => {
       .toHaveAttribute("src", "/assets/projects/improved/AquaGuard-AI--COVER.png");
     expect(screen.getByRole("img", { name: "Fake Image Detector screenshot preview" }))
       .toHaveAttribute("src", "/assets/projects/improved/Fake-Image-Detector--COVER.png");
-    expect(screen.queryByRole("img", { name: "Game Discovery Platform screenshot preview" }))
+    expect(screen.queryByRole("img", { name: "Multi-Tool Autonomous AI Agent screenshot preview" }))
       .not.toBeInTheDocument();
   });
 

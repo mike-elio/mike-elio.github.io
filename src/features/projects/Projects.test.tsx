@@ -4,12 +4,12 @@ import { vi } from "vitest";
 import { Projects } from "../../sections/Projects";
 
 describe("Projects", () => {
-  it("renders nine fixed projects without a runtime GitHub dependency", () => {
+  it("renders seven fixed projects without a runtime GitHub dependency", () => {
     render(<Projects />);
-    expect(screen.getAllByRole("article")).toHaveLength(9);
+    expect(screen.getAllByRole("article")).toHaveLength(7);
     expect(screen.getByText("Nahd AI Coaching Platform")).toBeInTheDocument();
     expect(screen.getByText("Adaptive AI Tool Guide")).toBeInTheDocument();
-    expect(screen.getByText("Game Discovery Platform")).toBeInTheDocument();
+    expect(screen.getByText("Multi-Tool Autonomous AI Agent")).toBeInTheDocument();
   });
 
   it("shows Nahd AI Coaching Platform's public GitHub source link", async () => {
