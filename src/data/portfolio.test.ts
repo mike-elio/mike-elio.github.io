@@ -99,7 +99,7 @@ describe("portfolio data", () => {
         "Expert Systems",
       ]),
     );
-    expect(JSON.stringify({ nahd, skills })).not.toContain("RAG");
+    expect(JSON.stringify(nahd)).not.toContain("RAG");
   });
 
   it("contains the approved professional internship without unsupported wording", () => {
