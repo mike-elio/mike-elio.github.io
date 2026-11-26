@@ -8,7 +8,8 @@ describe("portfolio timelines", () => {
     expect(
       screen.getByRole("heading", { level: 2, name: "Professional Experience" }),
     ).toBeInTheDocument();
-    expect(screen.getAllByRole("article")).toHaveLength(2);
+    expect(screen.getAllByRole("article")).toHaveLength(3);
+    expect(screen.getByText("Datheon · Internship scholarship")).toBeInTheDocument();
     expect(screen.getByText("New York City Metropolitan Area · Remote")).toBeInTheDocument();
     expect(
       screen.getByText("FlyRank AI · Internship"),
