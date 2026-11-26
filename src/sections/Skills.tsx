@@ -7,7 +7,7 @@ import { skills } from "../data/portfolio";
 const primarySkills = new Set([
   "Python", "JavaScript", "SQL", "HTML5",
   "PyTorch", "Hugging Face Transformers", "Machine Learning", "Natural Language Processing (NLP)",
-  "Retrieval-Augmented Generation (RAG)", "Agentic AI",
+  "Retrieval-Augmented Generation (RAG)", "Agentic AI", "LangChain",
   "FastAPI", "Node.js", "Express.js", "REST APIs",
   "Git", "GitHub", "Microsoft Azure", "Ollama",
 ]);

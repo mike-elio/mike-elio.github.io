@@ -110,6 +110,7 @@ export const skills: readonly SkillGroup[] = [
       { label: "Large Language Models (LLM)" },
       { label: "Retrieval-Augmented Generation (RAG)" },
       { label: "Agentic AI" },
+      { label: "LangChain" },
       { label: "Machine Learning" },
       { label: "Data Preprocessing" },
       { label: "Deep Learning" },

@@ -17,6 +17,7 @@ describe("About and Skills", () => {
     expect(screen.getByText("Microsoft Azure")).toBeInTheDocument();
     expect(screen.getByText("Retrieval-Augmented Generation (RAG)")).toBeInTheDocument();
     expect(screen.getByText("Agentic AI")).toBeInTheDocument();
+    expect(screen.getByText("LangChain")).toBeInTheDocument();
     expect(screen.queryByText("Advancing")).not.toBeInTheDocument();
     expect(screen.queryByText("Feature Engineering")).not.toBeInTheDocument();
     expect(screen.queryByText("Prompt Engineering")).not.toBeInTheDocument();
