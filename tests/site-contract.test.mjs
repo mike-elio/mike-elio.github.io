@@ -357,6 +357,9 @@ test("published files are recursively classified and contain no private data", a
 
   const approvedGithubUrls = new Set([
     "https://github.com/mike-elio",
+    "https://github.com/mike-elio/Datheon-python/tree/main/task1",
+    "https://github.com/mike-elio/Datheon-python/tree/main/task2",
+    "https://github.com/mike-elio/Datheon-python/tree/main/task3",
     "https://github.com/mike-elio/image-detection-fake",
     "https://github.com/mike-elio/Nahd-AI-Coaching-Platform",
     "https://github.com/mike-elio/toolguide",
@@ -402,6 +405,18 @@ test("source relationships, palette, dependencies, and legacy removal are closed
       .filter((project) => project.visibility === "public")
       .map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     [
+      {
+        slug: "datheon-json-extractor",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task1",
+      },
+      {
+        slug: "datheon-document-qa",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task2",
+      },
+      {
+        slug: "datheon-multi-tool-agent",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task3",
+      },
       {
         slug: "fake-image-detector",
         sourceUrl: "https://github.com/mike-elio/image-detection-fake",

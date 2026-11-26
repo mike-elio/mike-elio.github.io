@@ -80,7 +80,7 @@ export const profile: Profile = {
   positioning:
     "I don’t just explore the possibilities of Artificial Intelligence.",
   summary:
-    "I develop and evaluate models across Generative AI, LLMs, NLP, and Computer Vision, integrating them through reliable FastAPI backends.",
+    "I develop and evaluate models across Generative AI, LLMs, NLP, and Computer Vision, integrating them through reliable FastAPI backends. My three generative AI projects earned 9.3/10 (A+ with Distinction) in Datheon’s code audit.",
   availability: "Open to AI/ML & Backend AI opportunities · Remote & Relocation",
   roles: ["AI Backend Engineer"],
   social: [
@@ -156,6 +156,18 @@ export const skills: readonly SkillGroup[] = [
 
 export const experiences: readonly Experience[] = [
   {
+    title: "Python & Generative AI Intern",
+    organization: "Datheon",
+    employmentType: "Internship scholarship",
+    date: "Completed Nov 2026",
+    duration: "4 weeks · 14 learning hours",
+    location: "Online",
+    workArrangement: "Self-paced",
+    summary:
+      "Delivered three Python projects for an engineering audit. I validated invoice and résumé data with Pydantic, built a PDF assistant with page references, and connected a research agent to three types of tools. The code earned 9.3/10 overall and 9.4/10 for architecture.",
+    skills: ["Python", "LangChain", "Pydantic", "ChromaDB", "Gemini API"],
+  },
+  {
     title: "Backend AI Engineer - Intern",
     organization: "FlyRank AI",
     employmentType: "Internship",
@@ -188,6 +200,49 @@ export const experiences: readonly Experience[] = [
 ];
 
 export const projects: readonly Project[] = [
+  {
+    slug: "datheon-json-extractor",
+    title: "Structured LLM Prompt Pipeline & JSON Extractor",
+    eyebrow: "Datheon internship · Nov 2026",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task1",
+    summary: "Turn invoice and résumé text into validated JSON from the command line.",
+    description:
+      "Gemini extracts fields from plain text. Each document type has its own prompt template and Pydantic schema.",
+    contribution:
+      "I wrote the extraction pipeline and offline tests for malformed JSON, unexpected fields, and invalid types.",
+    features: ["Two document schemas for invoices and résumés", "Missing values represented explicitly", "Offline validation tests"],
+    technologies: ["Python", "Gemini API", "Pydantic"],
+  },
+  {
+    slug: "datheon-document-qa",
+    title: "Document Q&A Assistant with RAG & Vector Embeddings",
+    eyebrow: "Datheon internship · Nov 2026",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task2",
+    summary: "Ask questions about a collection of PDFs and see which pages the retriever selected.",
+    description:
+      "The pipeline splits PDF pages into overlapping chunks, creates Gemini embeddings, and stores them in ChromaDB.",
+    contribution:
+      "I built a LangChain retrieval pipeline that passes the two closest passages to Gemini and displays the retrieved filenames and page numbers with each answer.",
+    features: ["PDF indexing with page metadata", "Persistent vector storage", "Top-2 passage retrieval"],
+    technologies: ["Python", "LangChain", "ChromaDB", "Gemini", "RAG"],
+  },
+  {
+    slug: "datheon-multi-tool-agent",
+    title: "Multi-Tool Autonomous AI Agent",
+    eyebrow: "Datheon internship · Nov 2026",
+    visibility: "public",
+    sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task3",
+    summary:
+      "A console agent that reads PDFs, searches the web, and performs arithmetic to answer multi-step questions.",
+    description:
+      "For a research question, the agent can read a local or remote PDF and search for related information before composing an answer.",
+    contribution:
+      "I connected the tools and added a terminal trace of the selected tool and its result so each step can be inspected.",
+    features: ["Web search and PDF reading", "Arithmetic tool", "Tool-call and result previews"],
+    technologies: ["Python", "Gemini", "Tool Calling"],
+  },
   {
     slug: "fake-image-detector",
     title: "Fake Image Detector",
@@ -433,5 +488,23 @@ export const education: readonly Education[] = [
     type: "Professional Certificate",
     summary: "Certificate of Participation in the Fake Image Detector project at SharafAI.",
     skills: ["Python (Programming Language)", "PyTorch", "Computer Vision", "FastAPI", "Model Deployment"],
+  },
+  {
+    slug: "datheon-generative-ai-langchain",
+    title: "Python + Generative AI & LangChain Internship",
+    organization: "Datheon",
+    date: "Issued Nov 25, 2026",
+    type: "Professional Certificate",
+    credentialId: "CERT-DT-2026-FQSH5",
+    verificationUrl: "https://datheon.in/verify?id=DT-2026-FQSH5",
+    certificateImage: {
+      thumbnail: "/assets/certificates/datheon-thumb.jpg",
+      original: "/assets/certificates/datheon.png",
+      width: 1536,
+      height: 1024,
+    },
+    summary:
+      "Certificate of completion for a four-week internship scholarship with 14 hours of learning. Datheon approved all three projects and awarded an overall code audit score of 9.3/10 (A+ with Distinction).",
+    skills: ["Python", "Generative AI", "LangChain", "RAG", "AI Agents"],
   },
 ];

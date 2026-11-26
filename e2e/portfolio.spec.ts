@@ -244,7 +244,7 @@ test("has no serious or critical automated accessibility findings", async ({
 test("certificate previews load and enlarge with keyboard dismissal", async ({ page }) => {
   await page.goto("/#education");
   const previews = page.locator(".certificate-preview");
-  await expect(previews).toHaveCount(4);
+  await expect(previews).toHaveCount(5);
   for (const preview of await previews.all()) {
     await preview.scrollIntoViewIfNeeded();
     const thumbnail = preview.locator("img");

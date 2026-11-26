@@ -11,9 +11,9 @@ describe("portfolio data", () => {
     expect(profile.name).toBe("Mike Eliovits");
     expect(profile.roles).toEqual(["AI Backend Engineer"]);
     expect(skills).toHaveLength(4);
-    expect(experiences).toHaveLength(2);
-    expect(projects).toHaveLength(6);
-    expect(education).toHaveLength(5);
+    expect(experiences).toHaveLength(3);
+    expect(projects).toHaveLength(9);
+    expect(education).toHaveLength(6);
   });
 
   it("links verified public projects to their repositories", () => {
@@ -28,6 +28,18 @@ describe("portfolio data", () => {
     expect(
       publicProjects.map(({ slug, sourceUrl }) => ({ slug, sourceUrl })),
     ).toEqual([
+      {
+        slug: "datheon-json-extractor",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task1",
+      },
+      {
+        slug: "datheon-document-qa",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task2",
+      },
+      {
+        slug: "datheon-multi-tool-agent",
+        sourceUrl: "https://github.com/mike-elio/Datheon-python/tree/main/task3",
+      },
       {
         slug: "fake-image-detector",
         sourceUrl: "https://github.com/mike-elio/image-detection-fake",
@@ -109,7 +121,8 @@ describe("portfolio data", () => {
 
     expect(serialized).not.toMatch(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
     expect(serialized).not.toMatch(/employee|full-time|freelance client/i);
-    expect(experiences[0]).toMatchObject({
+    expect(experiences[0]).toMatchObject({ organization: "Datheon", employmentType: "Internship scholarship" });
+    expect(experiences[1]).toMatchObject({
       title: "Backend AI Engineer - Intern",
       organization: "FlyRank AI",
       employmentType: "Internship",
@@ -121,7 +134,7 @@ describe("portfolio data", () => {
         "Backend AI engineering internship with hands-on work in Python model development, supervised and unsupervised learning, data preprocessing, exploratory analysis, and deployment practices under mentorship. Applying Express.js, SQL, and prompt engineering.",
       skills: ["Backend AI Engineering", "Artificial Intelligence (AI)", "Express.js", "Prompt Engineering", "SQL"],
     });
-    expect(experiences[1]).toMatchObject({
+    expect(experiences[2]).toMatchObject({
       title: "Artificial Intelligence with Coding & Cybersecurity",
       organization: "EARTech Information Technology",
       employmentType: "Internship",
